@@ -1,1 +1,1 @@
-$('#message').find('b').text('$2000');
+// $('#message').find('b').text('$2000');
