@@ -5,7 +5,7 @@
 //   console.log(result);
 // });
 
-jQuery.ajax({
+$.ajax({
   type: 'GET',
   url: 'https://addb.absolutdrinks.com/drinks/?apiKey=791f7bb8531446d09af4f98a22a06424',
   dataType: 'jsonp',
@@ -14,7 +14,7 @@ jQuery.ajax({
   processData: true,
 
   success: function (data) {
-    console.log(JSON.stringify(data));
+    console.log(JSON.parse(data));
   },
 
   error: function (XMLHttpRequest, textStatus, errorThrown) {
