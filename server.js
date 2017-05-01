@@ -6,6 +6,7 @@ const pg = require('pg');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
+const drinkKey = '791f7bb8531446d09af4f98a22a06424';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
