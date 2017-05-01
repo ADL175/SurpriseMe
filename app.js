@@ -6,18 +6,18 @@
 // });
 
 jQuery.ajax({
-     type: "GET",
-     url: 'https://addb.absolutdrinks.com/drinks/?apiKey=791f7bb8531446d09af4f98a22a06424',
-     dataType: "jsonp",
-     cache: false,
-     crossDomain: true,
-     processData: true,
+  type: 'GET',
+  url: 'https://addb.absolutdrinks.com/drinks/?apiKey=791f7bb8531446d09af4f98a22a06424',
+  dataType: 'jsonp',
+  cache: false,
+  crossDomain: true,
+  processData: true,
 
+  success: function (data) {
+    console.log(JSON.stringify(data));
+  },
 
-     success: function (data) {
-         alert(JSON.stringify(data));
-     },
-     error: function (XMLHttpRequest, textStatus, errorThrown) {
-         alert("error");
-     }
- });
+  error: function (XMLHttpRequest, textStatus, errorThrown) {
+    console.log('error');
+  },
+});
