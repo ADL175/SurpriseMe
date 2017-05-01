@@ -1,12 +1,15 @@
 'use strict'
 
-const fs = require('fs');
+// const fs = require('fs');
 const express = require('express');
 const pg = require('pg');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const drinkKey = '791f7bb8531446d09af4f98a22a06424';
+const conString = process.env.DATABASE_URL + 'drinks';
+const client = new pg.Client(conString);
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +29,8 @@ app.listen(PORT, function () {
 ////////////////////////////////////////
 
 function loadDrinks() {
-  fs.readFile('https://addb.absolutdrinks.com/drinks/?apiKey=791f7bb8531446d09af4f98a22a06424', (err, fd) => {
+  console.log('load drinks says hi');
+  $.get('https://addb.absolutdrinks.com/drinks/?apiKey=791f7bb8531446d09af4f98a22a06424', (err, fd) => {
     JSON.parse(fd.toString()).forEach(ele => {
       client.query(
         `INSERT INTO
@@ -36,8 +40,30 @@ function loadDrinks() {
         [ele.id, ele.name, ele.description, ele.ingredients, ele.drinkTypes]
       )
       .catch(console.error);
+      console.log(ele);
     })
   })
 }
 
-function loadDB
+function loadDB() {
+  client.query('SELECT * FROM haha')
+    .then(console.log)
+    .catch(console.error);
+
+  // client.query(`
+  //   CREATE TABLE IF NOT EXISTS
+  //   drinks (
+  //     drink_id SERIAL PRIMARY KEY,
+  //     id VARCHAR(255) UNIQUE NOT NULL,
+  //     name VARCHAR(255) UNIQUE NOT NULL,
+  //     description VARCHAR(255) UNIQUE NOT NULL,
+  //     ingredients VARCHAR(255) UNIQUE NOT NULL,
+  //     drinkTypes VARCHAR(255) UNIQUE NOT NULL
+  //   );
+  //   `)
+  // // .then(loadDrinks)
+  // .catch(console.error);
+  // console.log('loadDB says hi');
+}
+
+loadDB();
