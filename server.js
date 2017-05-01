@@ -11,6 +11,10 @@ const drinkKey = '791f7bb8531446d09af4f98a22a06424';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('.'));
+app.use(function(req, res) {
+  res.header('Access-Control-Allow-Origin', '.');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+})
 
 app.get('/', (request, response) => response.sendFile('index.html', { root: './' }));
 
