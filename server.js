@@ -6,7 +6,6 @@ const pg = require('pg');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
-const requestProxy = require('express-request-proxy');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
