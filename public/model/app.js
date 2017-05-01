@@ -14,7 +14,7 @@ $.ajax({
   processData: true,
 
   success: function (data) {
-    console.log(JSON.parse(data));
+    console.log(JSON.stringify(data));
   },
 
   error: function (XMLHttpRequest, textStatus, errorThrown) {
