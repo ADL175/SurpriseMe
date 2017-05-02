@@ -49,32 +49,70 @@ function loadDrinks() {
   request.get(drinksURL)
   .then(results => {
     let drinksData = results.body.result;
-    drinksData.map(ele => {
-      console.log(ele.ingredients);
-      console.log('ele name '+ele.name);
+    drinksData.map(drinkObj => {
+      // console.log(drinkObj.ingredients);
+      // console.log('drinkObj name '+drinkObj.name);
       client.query(
         `INSERT INTO
         drinks(id, name)
         VALUES ($1, $2)
         ON CONFLICT DO NOTHING`,
-        [ele.id, ele.name]
+        [drinkObj.id, drinkObj.name]
       )
       .then( function() {
-        // let ingredientsData = ele.ingredients.result;
-        ele.ingredients.forEach( ing =>{
+        // let ingredientsData = drinkObj.ingredients.result;
+        drinkObj.ingredients.forEach(ingred =>{
           client.query(
             `INSERT INTO
             ingredients(type, id, text, textPlain)
             VALUES ($1, $2, $3, $4)
             ON CONFLICT DO NOTHING`,
-            [ing.type, ing.id, ing.text, ing.textPlain]
+            [ingred.type, ingred.id, ingred.text, ingred.textPlain]
             )
-            .catch(console.error);
-        })
-      })
-    })
-  }
-)}
+            //our special function for reltable
+            .then(function () {
+              client.query(
+                `INSERT INTO
+                reltable(drinkName, ingredName)
+                VALUES ($1, $2)
+                ON CONFLICT DO NOTHING`,
+                [drinkObj.name, ingred.id]
+              )
+
+            })
+            }
+          )
+
+
+
+
+
+
+
+
+        }) //ends second .then
+
+
+
+
+
+
+      }) //ends the drinksdata.map
+
+
+
+
+
+    }) //ends the first .then
+
+
+
+
+
+
+
+    // .catch(console.error);
+  } //ends main function
 
 //////// ** CREATE DRINKS AND INGREDIENTS TABLE ** ////////
 ////////////////////////////////////////
@@ -89,8 +127,7 @@ function loadDB() {
       name VARCHAR(1024) UNIQUE NOT NULL
         );
     `)
-  // .then(loadDrinks)
-  // .catch(console.error);
+
 
   client.query(`
     CREATE TABLE IF NOT EXISTS
@@ -102,6 +139,15 @@ function loadDB() {
       textPlain VARCHAR(1024) UNIQUE NOT NULL
     );
     `)
+
+    client.query(`
+      CREATE TABLE IF NOT EXISTS
+      reltable (
+        rel_id SERIAL PRIMARY KEY,
+        drinkName VARCHAR(1024) NOT NULL,
+        ingredName VARCHAR(1024) NOT NULL
+      );
+      `)
   .then(loadDrinks)
   .catch(console.error);
 
