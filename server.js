@@ -41,30 +41,43 @@ app.listen(PORT, function () {
 //             [ele.id, ele.name, ele.description, ele.ingredients, ele.drinkTypes]
 
 
-
+//////// ** LOAD DRINKS TO DRINKS TABLE ** ////////
+////////////////////////////////////////
 
 function loadDrinks() {
   console.log('load drinks says hi');
   request.get(drinksURL)
-  .then(result => {
-    let drinksData = result.body.result;
-    // console.log(result.body);
-    // console.log(drinksData);
-    // console.log(drinksData.forEach(ele => {ele.name}));
-      // console.log(JSON.parse(drinksData));
-
+  .then(results => {
+    let drinksData = results.body.result;
     drinksData.map(ele => {
+      console.log(ele.ingredients);
+      console.log('ele name '+ele.name);
       client.query(
         `INSERT INTO
-        drinks(id, name, ingredients)
-        VALUES ($1, $2, $3)
+        drinks(id, name)
+        VALUES ($1, $2)
         ON CONFLICT DO NOTHING`,
-        [ele.id, ele.name, ele.ingredients]
+        [ele.id, ele.name]
       )
-      .catch(console.error);
+      .then( function() {
+        // let ingredientsData = ele.ingredients.result;
+        ele.ingredients.forEach( ing =>{
+          client.query(
+            `INSERT INTO
+            ingredients(type, id, text, textPlain)
+            VALUES ($1, $2, $3, $4)
+            ON CONFLICT DO NOTHING`,
+            [ing.type, ing.id, ing.text, ing.textPlain]
+            )
+            .catch(console.error);
+        })
+      })
     })
   }
 )}
+
+//////// ** CREATE DRINKS AND INGREDIENTS TABLE ** ////////
+////////////////////////////////////////
 
 function loadDB() {
 
@@ -73,8 +86,20 @@ function loadDB() {
     drinks (
       drink_id SERIAL PRIMARY KEY,
       id VARCHAR(1024) UNIQUE NOT NULL,
-      name VARCHAR(1024) UNIQUE NOT NULL,
-      ingredients VARCHAR(1024) UNIQUE NOT NULL
+      name VARCHAR(1024) UNIQUE NOT NULL
+        );
+    `)
+  // .then(loadDrinks)
+  // .catch(console.error);
+
+  client.query(`
+    CREATE TABLE IF NOT EXISTS
+    ingredients (
+      ingredients_id SERIAL PRIMARY KEY,
+      type VARCHAR(1024) NOT NULL,
+      id VARCHAR(1024) UNIQUE NOT NULL,
+      text VARCHAR(1024) UNIQUE NOT NULL,
+      textPlain VARCHAR(1024) UNIQUE NOT NULL
     );
     `)
   .then(loadDrinks)
