@@ -1,6 +1,5 @@
-'use strict'
+'use strict';
 
-const fs = require('fs');
 const express = require('express');
 const pg = require('pg');
 const app = express();
@@ -12,18 +11,49 @@ const client = new pg.Client(conString);
 const request = require('superagent');
 const drinksURL = 'https://addb.absolutdrinks.com/drinks/?apiKey=791f7bb8531446d09af4f98a22a06424';
 client.connect();
-client.on('error', err => console.error('ERROR', err));
-
+client.on('error', console.error);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
-app.use(function(req, res) {
-  res.header('Access-Control-Allow-Origin', '.');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-})
+
 
 app.get('/', (request, response) => response.sendFile('index.html', { root: './public' }));
+
+//////// ** GET REQUESTS ** ////////
+////////////////////////////////////////
+
+app.get('/drinks/find', (request, response) =>{
+  let sql = `SELECT drinks.name, ingredients.id
+    FROM drinks
+    INNER JOIN reltable
+    ON reltable.drinkName = drinks.name
+    INNER JOIN ingredients
+    ON reltable.ingredName = ingredients.id
+    `;
+    console.log('pototototo');
+    client.query(sql).then(function(result){
+      console.log(result.rows);
+      response.send(result.rows);
+    });
+  }
+);
+
+
+
+//////// ** POST REQUESTS ** ////////
+////////////////////////////////////////
+
+
+//////// ** PUT REQUESTS ** ////////
+////////////////////////////////////////
+
+
+//////// ** DELETE REQUESTS ** ////////
+////////////////////////////////////////
+
+
+
 
 app.listen(PORT, function () {
   console.log(`Your server is now running on port ${PORT}`);
@@ -32,26 +62,15 @@ app.listen(PORT, function () {
 //////// ** DATABASE LOADERS ** ////////
 ////////////////////////////////////////
 
-
-//           client.query(
-//             `INSERT INTO
-//             drinks(id, name, description, ingredients, drinkTypes)
-//             VALUES ($1, $2, $3, $4, $5)
-//             ON CONFLICT DO NOTHING`,
-//             [ele.id, ele.name, ele.description, ele.ingredients, ele.drinkTypes]
-
-
 //////// ** LOAD DRINKS TO DRINKS TABLE ** ////////
 ////////////////////////////////////////
 
 function loadDrinks() {
-  console.log('load drinks says hi');
+  console.log('load drinks bleh says hi');
   request.get(drinksURL)
   .then(results => {
     let drinksData = results.body.result;
     drinksData.map(drinkObj => {
-      // console.log(drinkObj.ingredients);
-      // console.log('drinkObj name '+drinkObj.name);
       client.query(
         `INSERT INTO
         drinks(id, name)
@@ -60,7 +79,6 @@ function loadDrinks() {
         [drinkObj.id, drinkObj.name]
       )
       .then( function() {
-        // let ingredientsData = drinkObj.ingredients.result;
         drinkObj.ingredients.forEach(ingred =>{
           client.query(
             `INSERT INTO
@@ -78,39 +96,11 @@ function loadDrinks() {
                 ON CONFLICT DO NOTHING`,
                 [drinkObj.name, ingred.id]
               )
-
             })
-            }
-          )
-
-
-
-
-
-
-
-
+            })
         }) //ends second .then
-
-
-
-
-
-
       }) //ends the drinksdata.map
-
-
-
-
-
     }) //ends the first .then
-
-
-
-
-
-
-
     // .catch(console.error);
   } //ends main function
 
@@ -127,7 +117,6 @@ function loadDB() {
       name VARCHAR(1024) UNIQUE NOT NULL
         );
     `)
-
 
   client.query(`
     CREATE TABLE IF NOT EXISTS
