@@ -34,6 +34,14 @@ generatorView.populateFilters = function(){
 
 };
 
+generatorView.index = function(drinkSelect){
+//   $('#drink-data-section').show().siblings().hide();
+// $('#drink-data-section div').remove();
+  drinksSelect.forEach(a => $('#drink-data-section').append(render(a)))
+  generatorView.populateFilters();
+  // generatorView.handleFilters();
+}
+
 
 //////// ** HANDLE  OPTIONS FILTERS ** ////////
 ////////////////////////////////////////
@@ -44,11 +52,6 @@ generatorView.populateFilters = function(){
 //   }));
 // };
 
-// generatorView.index = function(drinkSelect){
-//   generatorView.populateFilters();
-//   generatorView.handleFilters();
-// }
-//
 
 
 

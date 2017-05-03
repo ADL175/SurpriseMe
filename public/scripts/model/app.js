@@ -8,29 +8,38 @@
   Drinks.all = [];
 
   Drinks.loadAll = rows => {
-    Drinks.all = rows.map(ele => new Drinks(ele));
-    console.log(Drinks.all);
+    console.log(rows);
+      let drinkNames = [];
+    rows.map(ele => {
+        // console.log(ele.name);
+        if(!drinkNames.includes(ele.name)){
+          drinkNames.push(ele.name);
+      }  });
+        console.log(drinkNames);
+
+      // new Drinks(ele);
+    // });
   };
 
   Drinks.fetchAll = callback => {
-    console.log('sup');
+    // console.log('sup');
     $.get('/drinks')
     .then(
       results => {
-        console.log(results);
+        // console.log(results);
         Drinks.loadAll(results);
         callback();
       }
     )
   };
-
-Drinks.allDrinks = () => {
-    return Drinks.all.map(drinks => drinks.name)
-    .reduce((drinkNames, drinkName)=>{
-      if(names.indexOf(drinkName)=== -1)drinkNames.push(drinkName);
-      return drinkNames;
-    }, []);
-};
+//
+// Drinks.allDrinks = () => {
+//     return Drinks.all.map(drinks => drinks.name)
+//     .reduce((drinkNames, drinkName)=>{
+//       if(names.indexOf(drinkName)=== -1)drinkNames.push(drinkName);
+//       return drinkNames;
+//     }, []);
+// };
 
 Drinks.allIngredients = function(callback){
   $.get('/ingredients', callback);
