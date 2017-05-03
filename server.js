@@ -20,11 +20,16 @@ app.use(express.static('./public'));
 
 app.get('/', (request, response) => response.sendFile('index.html', { root: './public' }));
 
+// app.get('/drinks', (request, response) => response.sendFile('index.html', { root: './public' }));
+//
+// app.get('/*', (request, response) => response.sendFile('index.html', { root: './public' }));
+
 //////// ** GET REQUESTS ** ////////
 ////////////////////////////////////////
 
 app.get('/drinks/find', (request, response) =>{
-  let sql = `SELECT drinks.name, ingredients.id
+  let sql =
+  `SELECT drinks.name, ingredients.id,
     FROM drinks
     INNER JOIN reltable
     ON reltable.drinkName = drinks.name
@@ -51,7 +56,11 @@ app.get('/ingredients', (request, response) => {
 app.get('/drinks', (request, response) => {
   console.log('wassup');
   client.query(
-/.
+    `SELECT *
+    FROM drinks
+    INNER JOIN reltable
+    ON drinks.name=reltable.drinkName;`
+  )
   .then(
     result => {
 
@@ -94,10 +103,10 @@ function loadDrinks() {
     drinksData.map(drinkObj => {
       client.query(
         `INSERT INTO
-        drinks(id, name)
-        VALUES ($1, $2)
+        drinks(id, name, recipe)
+        VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING`,
-        [drinkObj.id, drinkObj.name]
+        [drinkObj.id, drinkObj.name, drinkObj.ingredients.reduce(function(aggr,value){return aggr + '||' + value.textPlain;}, '')]
       )
       .then( function() {
         drinkObj.ingredients.forEach(ingred =>{
@@ -120,27 +129,30 @@ function loadDrinks() {
             })
             })
         }) //ends second .then
-      .then( function(){
-        drinkObj.videos.forEach(vid => {
-          client.query(
-            `INSERT INTO
-            videos(video, type, youvideo, youtype)
-            VALUES ($1, $2, $3, $4)
-            ON CONFLICT DO NOTHING`,
-            [vid.video, vid.type, vid.youvideo, vid.youtype]
-          )
-          .then(function() {
-            client.query(
-              `INSERT INTO
-              reltable(videoLink, youvideo)
-              VALUES ($3)
-              ON CONFLICT DO NOTHING`,
-              [rel.videoLink, vid.youvideo]
-            )
-          })
-        })
-      })
 
+//START -- YOUTUBE TABLE FOR YOUTUBE LINKS
+
+      // .then( function(){
+      //   drinkObj.videos.forEach(vid => {
+      //     client.query(
+      //       `INSERT INTO
+      //       videos(video, type)
+      //       VALUES ($1, $2)
+      //       ON CONFLICT DO NOTHING`,
+      //       [vid.video, vid.type]
+      //     )
+      //     .then(function() {
+      //       client.query(
+      //         `INSERT INTO
+      //         reltable(videoLink, youvideo)
+      //         VALUES ($3)
+      //         ON CONFLICT DO NOTHING`,
+      //         [rel.videoLink, vid.youvideo]
+      //       )
+      //     })
+      //   })
+      // })
+//END -- YOUTUBE TABLE FOR YOUTUBE LINKS
 
       }) //ends the drinksdata.map
     }) //ends the first .then
@@ -157,7 +169,8 @@ function loadDB() {
     drinks (
       drink_id SERIAL PRIMARY KEY,
       id VARCHAR(1024) UNIQUE NOT NULL,
-      name VARCHAR(1024) UNIQUE NOT NULL
+      name VARCHAR(1024) UNIQUE NOT NULL,
+      recipe VARCHAR(1024) UNIQUE NOT NULL
         );
     `)
 // INGREDIENTS TABLE
@@ -172,22 +185,21 @@ function loadDB() {
     );
     `)
 //YOUTUBE VIDEO TABLE
-    client.query(`
-      CREATE TABLE IF NOT EXISTS
-      videos (
-        videos_id SERIAL PRIMARY KEY,
-        video VARCHAR(1024) UNIQUE NOT NULL,
-        type VARCHAR(1024) UNIQUE NOT NULL
-      );
-      `)
+    // client.query(`
+    //   CREATE TABLE IF NOT EXISTS
+    //   videos (
+    //     videos_id SERIAL PRIMARY KEY,
+    //     video VARCHAR(1024) UNIQUE NOT NULL,
+    //     type VARCHAR(1024) UNIQUE NOT NULL
+    //   );
+    //   `)
 // RELATIONAL TABLE
     client.query(`
       CREATE TABLE IF NOT EXISTS
       reltable (
         rel_id SERIAL PRIMARY KEY,
         drinkName VARCHAR(1024) NOT NULL,
-        ingredName VARCHAR(1024) NOT NULL,
-        videoLink VARCHAR(1024) NOT NULL
+        ingredName VARCHAR(1024) NOT NULL
       );
       `)
   .then(loadDrinks)

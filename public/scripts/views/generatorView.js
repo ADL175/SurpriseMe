@@ -11,35 +11,47 @@ const generatorView = {};
 ////////////////////////////////////////
 
 generatorView.populateFilters = function(){
-  let template = Handlebars.compile($('#drink-template').text());
+  let template = Handlebars.compile($('#option-template').text());
   // Drinks.fetchAll();
-  console.log(Drinks.all);
+  // console.log(Drinks.all);
   Drinks.all.map(ele => {
-    console.log(ele);
+    // console.log(ele);
     $('#drink-filter').append(ele);
 
   });
-  // let options = Drinks.allDrinks().map(drink =>{
-  //   console.log(drink);
-  // }
-    //  template({val:drink})
-    //  );
+
+  Drinks.allDrinks(function(rows) {
+    if($('#drink-filter option').length < 2) {
+      $('#drink-filter').append(rows.map(row => template({val:row.drinks})));
+    }
+  });
 
   Drinks.allIngredients(function(rows) {
     if($('#ingredient-filter option').length < 2) {
       $('#ingredient-filter').append(rows.map(row => template({val:row.ingredients})));
     }
   });
+
 };
 
 
 //////// ** HANDLE  OPTIONS FILTERS ** ////////
 ////////////////////////////////////////
 // generatorView.handleFilters = function(){
-//   $('#filters').one('change', 'select', function( {
+//   $('#filters').on('change', 'select', function( {
 //     let resource = this.id.replace('-filter', '');
 //     page(`/${resource}/${$(this).val().replace(/\W+/g, '+')}`);
 //   }));
 // };
+
+// generatorView.index = function(drinkSelect){
+//   generatorView.populateFilters();
+//   generatorView.handleFilters();
+// }
+//
+
+
+
+
 Drinks.fetchAll(generatorView.populateFilters);
 // generatorView.handleFilters();
