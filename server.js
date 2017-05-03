@@ -18,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
 app.get('/', (request, response) => response.sendFile('index.html', { root: './public' }));
+app.get('/submission', (request, response) => response.sendFile('index.html', { root: './public' }));
+app.get('/about', (request, response) => response.sendFile('index.html', { root: './public' }));
 
 //////// ** GET REQUESTS ** ////////
 ////////////////////////////////////////

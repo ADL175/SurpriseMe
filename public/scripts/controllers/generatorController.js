@@ -8,5 +8,5 @@
     $('#generated-drinks-section').fadeIn(1500);
   };
 
-  module.aboutController = aboutController;
+  module.generatorController = generatorController;
 })(window);

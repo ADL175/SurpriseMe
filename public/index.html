@@ -10,12 +10,30 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="http://assets.absolutdrinks.com/api/addb-0.5.2.js" type="text/javascript"></script>
 </head>
+<head>
+  <script id="template-resume" type="text/x-handlebars-template">
+  <section id="about" class="tab-content">
+    <section class="data">
+      <h2>{{drinkName}}</h2>
+      <p>{{alcohol}}</p>
+      <p>{{mixer1}}</p>
+      <p>{{mixer2}}</p>
+      {{instructions}}
+    </section>
+  </section>
+</script>
+</head>
 <body>
   <header>
     <!-- ///////////////////
     ///// NAV
     ////////////////// -->
     <nav id="main-nav">
+      <ul>
+        <li class="tab" data-content="home"><a href="/"> Home</a></li>
+        <li class="tab" data-content="submission"><a href="/submission"> Submit</a></li>
+        <li class="tab" data-content="about"><a href="/about"> About</a></li>
+      </ul>
     </nav>
   </header>
   <main>
@@ -48,7 +66,8 @@
     <!-- ///////////////////
     ///// USER SUBMISSION SECTION
     ////////////////// -->
-    <form id="submission-post-section"></form>
+    <form id="submission-post-section" class="submission"></form>
+    <section id="form-template"></section>
 
     <!-- ///////////////////
     ///// ABOUT US SECTION

@@ -8,5 +8,5 @@
     $('#submission-post-selection').fadeIn(1500);
   };
 
-  module.homeController = homeController;
+  module.submissionController = submissionController;
 })(window);
