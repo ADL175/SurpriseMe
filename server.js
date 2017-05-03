@@ -51,11 +51,7 @@ app.get('/ingredients', (request, response) => {
 app.get('/drinks', (request, response) => {
   console.log('wassup');
   client.query(
-    `SELECT *
-    FROM drinks
-    INNER JOIN reltable
-    ON drinks.name=reltable.drinkName;`
-  )
+/.
   .then(
     result => {
 
@@ -124,16 +120,38 @@ function loadDrinks() {
             })
             })
         }) //ends second .then
+      .then( function(){
+        drinkObj.videos.forEach(vid => {
+          client.query(
+            `INSERT INTO
+            videos(video, type, youvideo, youtype)
+            VALUES ($1, $2, $3, $4)
+            ON CONFLICT DO NOTHING`,
+            [vid.video, vid.type, vid.youvideo, vid.youtype]
+          )
+          .then(function() {
+            client.query(
+              `INSERT INTO
+              reltable(videoLink, youvideo)
+              VALUES ($3)
+              ON CONFLICT DO NOTHING`,
+              [rel.videoLink, vid.youvideo]
+            )
+          })
+        })
+      })
+
+
       }) //ends the drinksdata.map
     }) //ends the first .then
     // .catch(console.error);
   } //ends main function
 
-//////// ** CREATE DRINKS AND INGREDIENTS TABLE ** ////////
+//////// ** CREATE DRINKS, INGREDIENTS, VIDEO, REL TABLE ** ////////
 ////////////////////////////////////////
 
 function loadDB() {
-
+// DRINKS TABLE
   client.query(`
     CREATE TABLE IF NOT EXISTS
     drinks (
@@ -142,7 +160,7 @@ function loadDB() {
       name VARCHAR(1024) UNIQUE NOT NULL
         );
     `)
-
+// INGREDIENTS TABLE
   client.query(`
     CREATE TABLE IF NOT EXISTS
     ingredients (
@@ -153,13 +171,23 @@ function loadDB() {
       textPlain VARCHAR(1024) UNIQUE NOT NULL
     );
     `)
-
+//YOUTUBE VIDEO TABLE
+    client.query(`
+      CREATE TABLE IF NOT EXISTS
+      videos (
+        videos_id SERIAL PRIMARY KEY,
+        video VARCHAR(1024) UNIQUE NOT NULL,
+        type VARCHAR(1024) UNIQUE NOT NULL
+      );
+      `)
+// RELATIONAL TABLE
     client.query(`
       CREATE TABLE IF NOT EXISTS
       reltable (
         rel_id SERIAL PRIMARY KEY,
         drinkName VARCHAR(1024) NOT NULL,
-        ingredName VARCHAR(1024) NOT NULL
+        ingredName VARCHAR(1024) NOT NULL,
+        videoLink VARCHAR(1024) NOT NULL
       );
       `)
   .then(loadDrinks)
