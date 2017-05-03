@@ -28,16 +28,7 @@
       $('<input>', {
         type: 'text',
         placeholder: 'Mixer',
-        id: 'mixer-name1',
-        style: 'width 20%',
-      })
-    );
-
-    $form.append(
-      $('<input>', {
-        type: 'text',
-        placeholder: 'Mixer',
-        id: 'mixer-name2',
+        id: 'ingredients',
         style: 'width 20%',
       })
     );
@@ -45,8 +36,8 @@
     $form.append(
       $('<textarea>', {
         type: 'text',
-        placeholder: 'Instructions',
-        id: 'instructions',
+        placeholder: 'Recipe',
+        id: 'recipe',
         style: 'width: 20%',
       })
     );
@@ -81,9 +72,8 @@
     let formDrink = new Drinks({
       drinkName: $('#drink-name').val(),
       alcohol: $('#alcohol-name').val(),
-      mixer1: $('#mixer-name1').val(),
-      mixer2: $('#mixer-name2').val(),
-      instructions: $('#instructions').val(),
+      ingredients: $('#ingredients').val(),
+      recipe: $('#recipe').val(),
     });
     $('#user-drinks').append(formDrink.toHtml('#form-template'));
   };
@@ -94,9 +84,8 @@
     let userDrink = new Drinks({
       drinkName: $('#drink-name').val(),
       alcohol: $('#alcohol-name').val(),
-      mixer1: $('#mixer-name1').val(),
-      mixer2: $('#mixer-name2').val(),
-      instructions: $('#instructions').val(),
+      ingredients: $('#ingredients').val(),
+      recipe: $('#recipe').val(),
     });
     userDrink.insertRecord();
   };

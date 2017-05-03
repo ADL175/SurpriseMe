@@ -13,11 +13,6 @@ Drinks.prototype.toHtml = function () {
   return template(this);
 };
 
-Drinks.prototype.insertRecord = function (callback) {
-  $.post('/submission', { drinkName: this.drinkName, alcohol: this.alcohol, mixer1: this.mixer1, mixer2: this.mixer2, instructions: this.instructions })
-  .then(console.log)
-  .then(callback);
-};
 
 Drinks.loadAll = rows => {
   Drinks.all = rows.map(ele => new Drinks(ele));
@@ -47,6 +42,39 @@ Drinks.allDrinks = () => {
 Drinks.allIngredients = function (callback) {
   $.get('/ingredients', callback);
 };
+
+Drinks.prototype.insertRecord = function (callback) {
+  $.post('/submission', { drinkName: this.drinkName, alcohol: this.alcohol, mixer1: this.mixer1, mixer2: this.mixer2, instructions: this.instructions })
+  .then(console.log)
+  .then(callback);
+};
+
+Drinks.prototype.deleteRecord = function (callback) {
+  $.ajax({
+    url: `/submission/${this.drink_id}`,
+    method: 'DELETE',
+  })
+  .then(console.log)
+  .then(callback);
+};
+
+Drinks.prototype.updateRecord = function (callback) {
+  $.ajax({
+    url: `/submission/${this.drink_id}`,
+    method: 'DELETE',
+    data: {
+      drinkName: this.drinkName,
+      alcohol: this.alcohol,
+      mixer1: this.mixer1,
+      mixer2: this.mixer2,
+      instructions: this.instructions,
+    },
+  })
+  .then(console.log)
+  .then(callback);
+};
+
+
 
 module.Drinks = Drinks;
 })(window);
