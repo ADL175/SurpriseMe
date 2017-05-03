@@ -17,25 +17,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
-
 app.get('/', (request, response) => response.sendFile('index.html', { root: './public' }));
 
 //////// ** GET REQUESTS ** ////////
 ////////////////////////////////////////
 
-app.get('/drinks/find', (request, response) =>{
+app.get('/drinks/find', (request, response) => {
   let sql = `SELECT drinks.name, ingredients.id
-    FROM drinks
-    INNER JOIN reltable
-    ON reltable.drinkName = drinks.name
-    INNER JOIN ingredients
-    ON reltable.ingredName = ingredients.id
-    `;
-    client.query(sql).then(function(result){
-      response.send(result.rows);
-    });
-  }
-);
+  FROM drinks
+  INNER JOIN reltable
+  ON reltable.drinkName = drinks.name
+  INNER JOIN ingredients
+  ON reltable.ingredName = ingredients.id`;
+
+  client.query(sql).then(function (result) {
+    response.send(result.rows);
+  });
+});
 
 app.get('/ingredients', (request, response) => {
   client.query(
@@ -46,7 +44,7 @@ app.get('/ingredients', (request, response) => {
   )
   .then(result => response.send(result.rows))
   .catch(console.error);
-})
+});
 
 app.get('/drinks', (request, response) => {
   console.log('wassup');
@@ -62,9 +60,9 @@ app.get('/drinks', (request, response) => {
       console.log(result.rows);
       response.send(result.rows);
     }
-)
+  )
   .catch(console.error);
-})
+});
 
 //////// ** POST REQUESTS ** ////////
 ////////////////////////////////////////
@@ -103,31 +101,32 @@ function loadDrinks() {
         ON CONFLICT DO NOTHING`,
         [drinkObj.id, drinkObj.name]
       )
-      .then( function() {
-        drinkObj.ingredients.forEach(ingred =>{
+      .then(function () {
+        drinkObj.ingredients.forEach(ingred => {
           client.query(
             `INSERT INTO
             ingredients(type, id, text, textPlain)
             VALUES ($1, $2, $3, $4)
             ON CONFLICT DO NOTHING`,
             [ingred.type, ingred.id, ingred.text, ingred.textPlain]
-            )
-            //our special function for reltable
-            .then(function () {
-              client.query(
-                `INSERT INTO
-                reltable(drinkName, ingredName)
-                VALUES ($1, $2)
-                ON CONFLICT DO NOTHING`,
-                [drinkObj.name, ingred.id]
-              )
-            })
-            })
-        }) //ends second .then
-      }) //ends the drinksdata.map
-    }) //ends the first .then
-    // .catch(console.error);
-  } //ends main function
+          )
+
+          //our special function for reltable
+          .then(function () {
+            client.query(
+              `INSERT INTO
+              reltable(drinkName, ingredName)
+              VALUES ($1, $2)
+              ON CONFLICT DO NOTHING`,
+              [drinkObj.name, ingred.id]
+            );
+          });
+        });
+      }); //ends second .then
+    }); //ends the drinksdata.map
+  }); //ends the first .then
+  // .catch(console.error);
+} //ends main function
 
 //////// ** CREATE DRINKS AND INGREDIENTS TABLE ** ////////
 ////////////////////////////////////////
@@ -140,31 +139,30 @@ function loadDB() {
       drink_id SERIAL PRIMARY KEY,
       id VARCHAR(1024) UNIQUE NOT NULL,
       name VARCHAR(1024) UNIQUE NOT NULL
-        );
-    `)
+    );
+    `);
 
   client.query(`
-    CREATE TABLE IF NOT EXISTS
-    ingredients (
-      ingredients_id SERIAL PRIMARY KEY,
-      type VARCHAR(1024) NOT NULL,
-      id VARCHAR(1024) UNIQUE NOT NULL,
-      text VARCHAR(1024) UNIQUE NOT NULL,
-      textPlain VARCHAR(1024) UNIQUE NOT NULL
-    );
-    `)
-
-    client.query(`
       CREATE TABLE IF NOT EXISTS
-      reltable (
-        rel_id SERIAL PRIMARY KEY,
-        drinkName VARCHAR(1024) NOT NULL,
-        ingredName VARCHAR(1024) NOT NULL
+      ingredients (
+        ingredients_id SERIAL PRIMARY KEY,
+        type VARCHAR(1024) NOT NULL,
+        id VARCHAR(1024) UNIQUE NOT NULL,
+        text VARCHAR(1024) UNIQUE NOT NULL,
+        textPlain VARCHAR(1024) UNIQUE NOT NULL
       );
-      `)
-  .then(loadDrinks)
-  .catch(console.error);
+      `);
 
+  client.query(`
+        CREATE TABLE IF NOT EXISTS
+        reltable (
+          rel_id SERIAL PRIMARY KEY,
+          drinkName VARCHAR(1024) NOT NULL,
+          ingredName VARCHAR(1024) NOT NULL
+        );
+        `)
+        .then(loadDrinks)
+        .catch(console.error);
 }
 
 loadDB();
