@@ -27,11 +27,31 @@
 ///// DRINK DATA SECTION
 ////////////////// -->
   <section id="drink-data-section">
-    <ul>
-      <li>DRINK items stuff</li>
-      <li>DRINK items stuff</li>
-      <li>DRINK items stuff</li>
+    <div class="">
+      <h2>SURPISE ME WITH DRINKS</h2>
+
+    <ul id="filters">
+
+
+      <li>
+        <select id="drink-filter" name="">
+          <option value="">
+            --Filter by Drinks--
+          </option>
+      </select>
+      </li>
+
+
+      <li>
+        <select id="ingredient-filter" name="">
+          <option value="">
+            --Filter by Ingredients--
+          </option>
+    </select>
+    </li>
+
     </ul>
+  </div>
 
   </section>
 
@@ -74,6 +94,7 @@
 ////////////////// -->
 <script src="/vendors/scripts/handlebars.js"></script>
 <script src="/vendors/scripts/page.js"></script>
+<script src="http://assets.absolutdrinks.com/api/addb-0.5.2.js" type="text/javascript"></script>
 
 <script src="/scripts/model/app.js"></script>
 <script src="/scripts/model/drinkData.js"></script>

@@ -31,15 +31,40 @@ app.get('/drinks/find', (request, response) =>{
     INNER JOIN ingredients
     ON reltable.ingredName = ingredients.id
     `;
-    console.log('pototototo');
     client.query(sql).then(function(result){
-      console.log(result.rows);
       response.send(result.rows);
     });
   }
 );
 
+app.get('/ingredients', (request, response) => {
+  client.query(
+    `SELECT *
+    FROM ingredients
+    INNER JOIN reltable
+    ON ingredients.id=reltable.ingredName;`
+  )
+  .then(result => response.send(result.rows))
+  .catch(console.error);
+})
 
+app.get('/drinks', (request, response) => {
+  console.log('wassup');
+  client.query(
+    `SELECT *
+    FROM drinks
+    INNER JOIN reltable
+    ON drinks.name=reltable.drinkName;`
+  )
+  .then(
+    result => {
+
+      console.log(result.rows);
+      response.send(result.rows);
+    }
+)
+  .catch(console.error);
+})
 
 //////// ** POST REQUESTS ** ////////
 ////////////////////////////////////////
@@ -66,7 +91,7 @@ app.listen(PORT, function () {
 ////////////////////////////////////////
 
 function loadDrinks() {
-  console.log('load drinks bleh says hi');
+  console.log('load drinks says hi');
   request.get(drinksURL)
   .then(results => {
     let drinksData = results.body.result;
