@@ -1,12 +1,23 @@
 'use strict';
 
-//WIll have to do IIFE later
+(function (module) {
 
 function Drinks(drinkDataObj) {
   Object.keys(drinkDataObj).forEach(key => this[key] = drinkDataObj[key]);
 }
 
 Drinks.all = [];
+
+Drinks.prototype.toHtml = function () {
+  let template = Handlebars.compile($('#form-template').text());
+  return template(this);
+};
+
+Drinks.prototype.insertRecord = function (callback) {
+  $.post('/submission', { drinkName: this.drinkName, alcohol: this.alcohol, mixer1: this.mixer1, mixer2: this.mixer2, instructions: this.instructions })
+  .then(console.log)
+  .then(callback);
+};
 
 Drinks.loadAll = rows => {
   Drinks.all = rows.map(ele => new Drinks(ele));
@@ -36,5 +47,8 @@ Drinks.allDrinks = () => {
 Drinks.allIngredients = function (callback) {
   $.get('/ingredients', callback);
 };
+
+module.Drinks = Drinks;
+})(window);
 
 // Drinks.fetchAll();
