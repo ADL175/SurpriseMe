@@ -23,6 +23,12 @@
       </section>
     </section>
   </script>
+  <!-- ///////////////////
+  ///// HANDLEBARS FOR FILTERS
+  ////////////////// -->
+  <script id="option-template" type="text/x-handlebars-templage">
+    <option value="{{val}}">{{val}}</option>
+  </script>
 </head>
 <body>
   <header>
@@ -39,42 +45,92 @@
       </ul>
     </nav>
   </div>
-  </header>
-  <div class="header">
-    <img src="/images/header.png" alt="">
-    <iframe src="//giphy.com/embed/uddDNZtt72kBW" width="680" height="240" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fun-high-quality-bartender-uddDNZtt72kBW"></a></p>
-  </div>
-  <main>
-
-    <!-- ///////////////////
-    ///// DRINK DATA SECTION
-    ////////////////// -->
-      <div id="drink-container">
-      <section id="drink-selection" class="drink-selection">
-        <section id="drink-data-section">
-          <h2>SURPISE ME WITH DRINKS</h2>
-
-          <ul id="filters">
-
-            <li>
-              <select id="drink-filter" name="">
-                <option value="">
-                  Filter by Drinks
-                </option>
-              </select>
-            </li>
-
-            <li>
-              <select id="ingredient-filter" name="">
-                <option value="">
-                  Filter by Ingredients
-                </option>
-              </select>
-            </li>
-          </ul>
-        </section>
-      </section>
+    <div class="header">
+      <img src="/images/header.png" alt="">
+      <iframe src="//giphy.com/embed/uddDNZtt72kBW" width="680" height="240" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fun-high-quality-bartender-uddDNZtt72kBW"></a></p>
     </div>
+</header>
+<main>
+
+<!-- ///////////////////
+///// DRINK DATA SECTION
+////////////////// -->
+<div id="drink-container">
+<section id="drink-selection" class="drink-selection">
+  <section id="drink-data-section">
+    <div class="">
+      <h2>SURPISE ME WITH DRINKS</h2>
+
+    <ul id="filters">
+
+<!-- DRINK FILTER -->
+      <li>
+        <select id="drink-filter" name="">
+          <option value="">
+            --Filter by Drinks--
+          </option>
+      </select>
+      </li>
+
+<!-- ABSOLUT VODKA -->
+      <li>
+        <select id="absolut-filter" name="">
+          <option value="">
+            --Filter by ABSOLUT--
+          </option>
+    </select>
+    </li>
+
+<!-- OTHER BASE SPIRITS -->
+    <li>
+      <select id="other-base-filter" name="">
+        <option value="">
+          --Filter by OTHER BASE SPIRITS--
+        </option>
+  </select>
+  </li>
+
+<!-- OTHER SPIRITS -->
+  <li>
+    <select id="other-spirits-filter" name="">
+      <option value="">
+        --Filter by OTHER SPIRITS--
+      </option>
+</select>
+</li>
+
+<!-- INGREDIENTS -->
+<li>
+  <select id="ingredient-filter" name="">
+    <option value="">
+      --Filter by Ingredients--
+    </option>
+</select>
+</li>
+<!-- MIXERS -->
+
+<li>
+  <select id="mixers-filter" name="">
+    <option value="">
+      --Filter by MIXERS--
+    </option>
+</select>
+</li>
+<!-- FRUITS AND BERRIES -->
+
+<li>
+  <select id="fruits-filter" name="">
+    <option value="">
+      --Filter by FRUITS N BERRIES--
+    </option>
+</select>
+</li>
+    </ul>
+    </section>
+  </div>
+</section>
+</div>
+
 
     <!-- ///////////////////
     ///// USER SUBMISSION SECTION
@@ -118,7 +174,6 @@
 <script src="http://assets.absolutdrinks.com/api/addb-0.5.2.js" type="text/javascript"></script>
 
 <script src="/scripts/model/app.js"></script>
-<script src="/scripts/model/drinkData.js"></script>
 
 <script src="/scripts/views/aboutView.js"></script>
 <script src="/scripts/views/generatorView.js"></script>
