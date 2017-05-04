@@ -1,8 +1,8 @@
-(function () {
+(function (module) {
   const newDrink = {};
 
   newDrink.createForm = function () {
-    var $form = $('<form/>', {
+    var $form = $('<form>', {
       action: '/submission',
     });
 
@@ -64,7 +64,7 @@
   newDrink.create = function () {
     console.log('create function');
     $('#user-drinks').empty();
-    let formDrink = new Drinks({
+    let formDrink = new Submit({
       drinkName: $('#drink-name').val(),
       alcohol: $('#alcohol-name').val(),
       ingredients: $('#ingredients').val(),
@@ -76,7 +76,7 @@
   newDrink.submit = function (event) {
     console.log('handle submit');
     event.preventDefault();
-    let userDrink = new Drinks({
+    let userDrink = new Submit({
       drinkName: $('#drink-name').val(),
       alcohol: $('#alcohol-name').val(),
       ingredients: $('#ingredients').val(),
@@ -87,4 +87,6 @@
 
   newDrink.initNewDrinkPage();
   newDrink.createForm();
-})();
+
+  module.newDrink = newDrink;
+})(window);
