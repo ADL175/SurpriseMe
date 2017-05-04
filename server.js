@@ -17,12 +17,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
-
 app.get('/', (request, response) => response.sendFile('index.html', { root: './public' }));
+app.get('/login', (request, response) => response.sendFile('login.html', { root: './public' }));
+app.get('/submission', (request, response) => response.sendFile('index.html', { root: './public' }));
+app.get('/about', (request, response) => response.sendFile('index.html', { root: './public' }));
 
 //////// ** GET REQUESTS ** ////////
 ////////////////////////////////////////
-
 
 app.get('/drinks', (request, response) => {
   console.log('wassup');
@@ -36,13 +37,17 @@ app.get('/drinks', (request, response) => {
       console.log(result.rows);
       response.send(result.rows);
     }
-)
+  )
   .catch(console.error);
-})
+});
 
 //////// ** POST REQUESTS ** ////////
 ////////////////////////////////////////
-
+// app.post('/drinks', (request, response) => {
+//   client.query(
+//     'INSERT INTO drinks(drink_id, ingredients, recipe) SELECT drink_id, $1, $2, $3, $4 FROM '
+//   )
+// })
 
 //////// ** PUT REQUESTS ** ////////
 ////////////////////////////////////////
@@ -85,8 +90,6 @@ function loadDrinks() {
 
         ]
       )
-
-
       }) //ends the drinksdata.map
     }) //ends the first .then
     // .catch(console.error);
@@ -112,7 +115,6 @@ function loadDB() {
 
   .then(loadDrinks)
   .catch(console.error);
-
 }
 
 loadDB();

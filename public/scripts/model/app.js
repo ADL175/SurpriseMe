@@ -1,9 +1,8 @@
 'use strict';
-//WIll have to do IIFE later
+<<<<<<< HEAD
 
-  // function Drinks(drinkDataObj) {
-  //   Object.keys(drinkDataObj).forEach(key => this[key] = drinkDataObj[key]);
-  // }
+(function (module) {
+
   Drinks.all = [];
   Ingredients.all =[];
 
@@ -35,6 +34,26 @@
   console.log(Drinks.all);
 };
 
+Drinks.fetchAll = callback => {
+  console.log('sup');
+  $.get('/drinks')
+  .then(
+    results => {
+      console.log(results);
+      Drinks.loadAll(results);
+      callback();
+    }
+  );
+};
+
+Drinks.allDrinks = () => {
+  return Drinks.all.map(drinks => drinks.name)
+  .reduce((drinkNames, drinkName) => {
+    if (names.indexOf(drinkName) === -1)drinkNames.push(drinkName);
+    return drinkNames;
+  }, []);
+};
+
   Drinks.fetchAll = callback => {
     // console.log('sup');
     $.get('/drinks')
@@ -54,9 +73,49 @@
 //       return drinkNames;
 //     }, []);
 // };
+Drinks.prototype.toHtml = function () {
+  let template = Handlebars.compile($('#form-template').text());
+  return template(this);
+};
 
-Drinks.allIngredients = function(callback){
+Drinks.allIngredients = function (callback) {
   $.get('/ingredients', callback);
 };
 
-// Drinks.fetchAll();
+Drinks.prototype.insertRecord = function (callback) {
+  $.post('/drinks', { drinkName: this.drinkName, alcohol: this.alcohol, ingredients: this.ingredients, recipe: this.recipe })
+  .then(console.log)
+  .then(callback);
+};
+
+Drinks.prototype.deleteRecord = function (callback) {
+  $.ajax({
+    url: `/drinks/${this.drink_id}`,
+    method: 'DELETE',
+  })
+  .then(console.log)
+  .then(callback);
+};
+
+Drinks.prototype.updateRecord = function (callback) {
+  $.ajax({
+    url: `/drinks/${this.drink_id}`,
+    method: 'DELETE',
+    data: {
+      drinkName: this.drinkName,
+      alcohol: this.alcohol,
+      ingredients: this.ingredients,
+      recipe: this.recipe,
+    },
+  })
+  .then(console.log)
+  .then(callback);
+};
+
+$(document).ready(function () {
+Drinks.prototype.toHtml(homeView.populateFilters)
+  $('.nav .tab:first').click();
+});
+
+module.Drinks = Drinks;
+})(window);

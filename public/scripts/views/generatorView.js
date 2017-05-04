@@ -1,11 +1,4 @@
-'use strict';
 
-const generatorView = {};
-
-// const render = function(drink){
-//   let template = Handlebars.compile($('#drink-template').text());
-//   return template(drink);
-// };
 
 //////// ** DRINK / ING OPTIONS FILTERS ** ////////
 ////////////////////////////////////////
