@@ -1,5 +1,5 @@
 'use strict';
-(function(module) {
+(function (module) {
   const generatorController = {};
 
   generatorController.init = () => {

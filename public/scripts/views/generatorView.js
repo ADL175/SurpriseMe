@@ -1,5 +1,3 @@
-
-
 //////// ** DRINK / ING OPTIONS FILTERS ** ////////
 ////////////////////////////////////////
 
@@ -8,91 +6,86 @@ let drinkName = [];
 let alcoholType = [];
 
 (function (module) {
-const generatorView = {};
+  const generatorView = {};
 
-Drinks.all.forEach
+  Drinks.all.forEach;
 
-generatorView.populateFilters = function(){
-  let template = Handlebars.compile($('#option-template').text());
-  Drinks.fetchAll();
-  // console.log(Drinks.all);
+  generatorView.populateFilters = function () {
+    let template = Handlebars.compile($('#option-template').text());
+    Drinks.fetchAll();
 
-  //////// INGREDIENTS FILTERS ** ////////
-  ////////////////////////////////////////
+    // console.log(Drinks.all);
 
-  Drinks.all.forEach(drink => {
-    let ing = drink.ingredients;
-    for (let i = 0; i < ing.length; i++){
-      if(!uniqueIng.includes(ing[i].name)){
-        // console.log(ing[i]);
-        uniqueIng.push(ing[i].name);
-      }
-    }
-  });
-    uniqueIng.sort().forEach(i => {
-      var option = new Option(i,i);
-      $('#ingredient-filter').append($(option));
-    });
-
-/////// ** DRINK NAMES FILTERS ** ////////
+    //////// INGREDIENTS FILTERS ** ////////
     ////////////////////////////////////////
 
     Drinks.all.forEach(drink => {
-      drinkName.push(drink.name)
-    });
-      drinkName.sort().forEach(i => {
-        var option = new Option(i,i);
-        $('#drink-filter').append($(option));
-      });
-
-    Drinks.all.forEach(drink => {
-      let alch = drink.alcoholType;
-      for (let i = 0; i < alch.length; i++) {
-        if(!alcoholType.includes(alch[i])) {
+      let ing = drink.ingredients;
+      for (let i = 0; i < ing.length; i++) {
+        if (!uniqueIng.includes(ing[i].name)) {
           // console.log(ing[i]);
           uniqueIng.push(ing[i].name);
         }
       }
     });
-      uniqueIng.sort().forEach(i => {
-        var option = new Option(i,i);
-        $('#ingredient-filter').append($(option));
-      });
+    uniqueIng.sort().forEach(i => {
+      var option = new Option(i, i);
+      $('#ingredient-filter').append($(option));
+    });
 
+    /////// ** DRINK NAMES FILTERS ** ////////
+    ////////////////////////////////////////
 
+    Drinks.all.forEach(drink => {
+      drinkName.push(drink.name);
+    });
+    drinkName.sort().forEach(i => {
+      var option = new Option(i, i);
+      $('#drink-filter').append($(option));
+    });
 
+    Drinks.all.forEach(drink => {
+      let alch = drink.alcoholType;
+      for (let i = 0; i < alch.length; i++) {
+        if (!alcoholType.includes(alch[i])) {
+          // console.log(ing[i]);
+          uniqueIng.push(ing[i].name);
+        }
+      }
+    });
+    uniqueIng.sort().forEach(i => {
+      var option = new Option(i, i);
+      $('#ingredient-filter').append($(option));
+    });
 
+    Drinks.allDrinks(function (rows) {
+      if ($('#drink-filter option').length < 2) {
+        $('#drink-filter').append(rows.map(row => template({
+          val: row.drinks,
+        })));
+      }
+    });
+  };
 
+  generatorView.index = function (drinkSelect) {
+    //   $('#drink-data-section').show().siblings().hide();
+    // $('#drink-data-section div').remove();
+    drinkSelect.forEach(a => $('#drink-data-section').append(render(a)));
+    generatorView.populateFilters();
 
-  Drinks.allDrinks(function(rows) {
-    if($('#drink-filter option').length < 2) {
-      $('#drink-filter').append(rows.map(row => template({val:row.drinks})));
-    }
-  });
-};
+    // generatorView.handleFilters();
+  };
 
-generatorView.index = function(drinkSelect){
-//   $('#drink-data-section').show().siblings().hide();
-// $('#drink-data-section div').remove();
-  drinkSelect.forEach(a => $('#drink-data-section').append(render(a)))
-  generatorView.populateFilters();
+  //////// ** HANDLE  OPTIONS FILTERS ** ////////
+  ////////////////////////////////////////
+  // generatorView.handleFilters = function(){
+  //   $('#filters').on('change', 'select', function( {
+  //     let resource = this.id.replace('-filter', '');
+  //     page(`/${resource}/${$(this).val().replace(/\W+/g, '+')}`);
+  //   }));
+  // };
+
+  Drinks.fetchAll(generatorView.populateFilters);
+
   // generatorView.handleFilters();
-}
-
-
-//////// ** HANDLE  OPTIONS FILTERS ** ////////
-////////////////////////////////////////
-// generatorView.handleFilters = function(){
-//   $('#filters').on('change', 'select', function( {
-//     let resource = this.id.replace('-filter', '');
-//     page(`/${resource}/${$(this).val().replace(/\W+/g, '+')}`);
-//   }));
-// };
-
-
-
-
-
-Drinks.fetchAll(generatorView.populateFilters);
-// generatorView.handleFilters();
 })(window);

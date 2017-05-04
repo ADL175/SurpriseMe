@@ -1,5 +1,5 @@
 'use strict';
-(function(module) {
+(function (module) {
 
 const homeView = {};
 
@@ -13,6 +13,7 @@ const homeView = {};
 
 homeView.populateFilters = function () {
   let template = Handlebars.compile($('#drink-template').text());
+
   // Drinks.fetchAll();
   console.log(Drinks.all);
   Drinks.all.map(ele => {
@@ -43,6 +44,7 @@ homeView.populateFilters = function () {
 // };
 Drinks.fetchAll(homeView.populateFilters);
 
-module.homeView = homeView
+module.homeView = homeView;
+
 // homeView.handleFilters();
 })(window);
