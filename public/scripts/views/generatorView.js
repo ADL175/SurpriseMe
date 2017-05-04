@@ -12,6 +12,7 @@ const generatorView = {};
 
 let uniqueIng = [];
 let drinkName = [];
+let alcoholType = [];
 
 Drinks.all.forEach
 
@@ -48,6 +49,19 @@ generatorView.populateFilters = function(){
         $('#drink-filter').append($(option));
       });
 
+    Drinks.all.forEach(drink => {
+      let alch = drink.alcoholType;
+      for (let i = 0; i < alch.length; i++){
+        if(!alcoholType.includes(alch[i].)){
+          // console.log(ing[i]);
+          uniqueIng.push(ing[i].name);
+        }
+      }
+    });
+      uniqueIng.sort().forEach(i => {
+        var option = new Option(i,i);
+        $('#ingredient-filter').append($(option));
+      });
 
 
 

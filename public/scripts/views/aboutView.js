@@ -7,7 +7,6 @@
     About.all.forEach(function(about){
       console.log(about);
       $('#about-us-section').append(about.toHtml());
-      console.log(about.toHtml());
 });
 }
   module.aboutView = aboutView;
