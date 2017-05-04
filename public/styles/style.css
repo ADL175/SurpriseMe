@@ -1,0 +1,88 @@
+
+.nav a {
+  float: right;
+  /*list-style-type: none;*/
+  text-decoration: none;
+  /*border-style: solid;*/
+  border-top-left-radius: 15px ;
+  border-top-right-radius: 15px;
+  padding: 12px;
+  margin: 0px;
+  font-weight: bold;
+  color: #10302C;
+}
+
+.nav a:hover {
+  float: right;
+  /*list-style-type: none;*/
+  text-decoration: none;
+  /*border-style: solid;*/
+  border-top-left-radius: 15px ;
+  border-top-right-radius: 15px;
+  padding: 12px;
+  margin: 0px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.submission-box {
+  width: 100%;
+  margin: auto;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.submission-form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 30em;
+  margin: 10em auto 100px;
+  padding: 8em;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.drink-selection {
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  border: solid;
+}
+
+input {
+  width: 100%;
+  margin: .5em 0;
+  border: 1px solid #ccc;
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+}
+
+input[type="checkbox"] {
+  width: .28em;
+  height: .28em;
+  font-size: 3em;
+}
+
+textarea {
+  width: 100%;
+  margin: .5em 0;
+  font-size: 2em;
+  border: 1px solid #ccc;
+  border-radius: 0;
+}
+
+input:invalid, textarea:invalid {
+  border-color: #AE3F3C;
+}
+
+input:valid, textarea:valid {
+  border-color: #89CB8E;
+}
