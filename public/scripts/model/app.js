@@ -73,6 +73,11 @@ Drinks.prototype.updateRecord = function (callback) {
   .then(callback);
 };
 
+$(document).ready(function () {
+Drinks.prototype.toHtml(homeView.populateFilters)
+  $('.nav .tab:first').click();
+});
+
 module.Drinks = Drinks;
 })(window);
 

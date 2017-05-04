@@ -3,10 +3,11 @@
 
   homeController.init = () => {
     $('#about-us-section').hide();
-    $('#submission-post-selection').hide();
+    $('#submission-view').hide();
     $('#generated-drinks-section').hide();
-    $('#drink-data-selection').fadeIn(1500);
+    $('#drink-container').fadeIn(1500);
   };
 
+  Drinks.prototype.toHtml(homeView.populateFilters)
   module.homeController = homeController;
 })(window);

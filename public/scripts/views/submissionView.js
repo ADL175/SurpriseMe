@@ -11,7 +11,6 @@
         type: 'text',
         placeholder: 'Drink Name',
         id: 'drink-name',
-        style: 'width: 30%',
       })
     );
 
@@ -20,7 +19,6 @@
         type: 'text',
         placeholder: 'Alcohol Type',
         id: 'alcohol-name',
-        style: 'width: 30%',
       })
     );
 
@@ -29,7 +27,6 @@
         type: 'text',
         placeholder: 'Ingredients',
         id: 'ingredients',
-        style: 'width: 30%',
       })
     );
 
@@ -38,7 +35,6 @@
         type: 'text',
         placeholder: 'Recipe',
         id: 'recipe',
-        style: 'width: 30%',
       })
     );
 
@@ -47,7 +43,6 @@
         type: 'submit',
         id: 'submit',
         name: 'submit',
-        style: 'width: 30%',
       })
     );
 

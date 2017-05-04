@@ -2,9 +2,9 @@
   const generatorController = {};
 
   generatorController.init = () => {
-    $('#drink-data-selection').hide();
+    $('#drink-container').hide();
     $('#about-us-section').hide();
-    $('#submission-post-selection').hide();
+    $('#submission-view').hide();
     $('#generated-drinks-section').fadeIn(1500);
   };
 

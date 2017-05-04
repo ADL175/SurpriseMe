@@ -1,4 +1,5 @@
 'use strict';
+(function(module) {
 
 const homeView = {};
 
@@ -42,4 +43,6 @@ homeView.populateFilters = function () {
 // };
 Drinks.fetchAll(homeView.populateFilters);
 
+module.homeView = homeView
 // homeView.handleFilters();
+})(window);
