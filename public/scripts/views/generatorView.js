@@ -10,34 +10,61 @@ const generatorView = {};
 //////// ** DRINK / ING OPTIONS FILTERS ** ////////
 ////////////////////////////////////////
 
+let uniqueIng = [];
+let drinkName = [];
+
+Drinks.all.forEach
+
 generatorView.populateFilters = function(){
   let template = Handlebars.compile($('#option-template').text());
-  // Drinks.fetchAll();
+  Drinks.fetchAll();
   // console.log(Drinks.all);
-  Drinks.all.map(ele => {
-    // console.log(ele);
-    $('#drink-filter').append(ele);
 
+  //////// INGREDIENTS FILTERS ** ////////
+  ////////////////////////////////////////
+
+  Drinks.all.forEach(drink => {
+    let ing = drink.ingredients;
+    for (let i = 0; i < ing.length; i++){
+      if(!uniqueIng.includes(ing[i].name)){
+        // console.log(ing[i]);
+        uniqueIng.push(ing[i].name);
+      }
+    }
   });
+    uniqueIng.sort().forEach(i => {
+      var option = new Option(i,i);
+      $('#ingredient-filter').append($(option));
+    });
+
+/////// ** DRINK NAMES FILTERS ** ////////
+    ////////////////////////////////////////
+
+    Drinks.all.forEach(drink => {
+      drinkName.push(drink.name)
+    });
+      drinkName.sort().forEach(i => {
+        var option = new Option(i,i);
+        $('#drink-filter').append($(option));
+      });
+
+
+
+
+
+
 
   Drinks.allDrinks(function(rows) {
     if($('#drink-filter option').length < 2) {
       $('#drink-filter').append(rows.map(row => template({val:row.drinks})));
     }
   });
-
-  Drinks.allIngredients(function(rows) {
-    if($('#ingredient-filter option').length < 2) {
-      $('#ingredient-filter').append(rows.map(row => template({val:row.ingredients})));
-    }
-  });
-
 };
 
 generatorView.index = function(drinkSelect){
 //   $('#drink-data-section').show().siblings().hide();
 // $('#drink-data-section div').remove();
-  drinksSelect.forEach(a => $('#drink-data-section').append(render(a)))
+  drinkSelect.forEach(a => $('#drink-data-section').append(render(a)))
   generatorView.populateFilters();
   // generatorView.handleFilters();
 }
