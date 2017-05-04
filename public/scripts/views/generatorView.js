@@ -7,6 +7,9 @@ let uniqueIng = [];
 let drinkName = [];
 let alcoholType = [];
 
+(function (module) {
+const generatorView = {};
+
 Drinks.all.forEach
 
 generatorView.populateFilters = function(){
@@ -44,8 +47,8 @@ generatorView.populateFilters = function(){
 
     Drinks.all.forEach(drink => {
       let alch = drink.alcoholType;
-      for (let i = 0; i < alch.length; i++){
-        if(!alcoholType.includes(alch[i].)){
+      for (let i = 0; i < alch.length; i++) {
+        if(!alcoholType.includes(alch[i])) {
           // console.log(ing[i]);
           uniqueIng.push(ing[i].name);
         }
@@ -92,3 +95,4 @@ generatorView.index = function(drinkSelect){
 
 Drinks.fetchAll(generatorView.populateFilters);
 // generatorView.handleFilters();
+})(window);
