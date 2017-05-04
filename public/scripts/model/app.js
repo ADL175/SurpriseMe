@@ -33,7 +33,7 @@ Drinks.fetchAll = callback => {
 
 Drinks.allDrinks = () => {
   return Drinks.all.map(drinks => drinks.name)
-  .reduce((drinkNames, drinkName)=> {
+  .reduce((drinkNames, drinkName) => {
     if (names.indexOf(drinkName) === -1)drinkNames.push(drinkName);
     return drinkNames;
   }, []);
@@ -44,14 +44,14 @@ Drinks.allIngredients = function (callback) {
 };
 
 Drinks.prototype.insertRecord = function (callback) {
-  $.post('/submission', { drinkName: this.drinkName, alcohol: this.alcohol, mixer1: this.mixer1, mixer2: this.mixer2, instructions: this.instructions })
+  $.post('/drinks', { drinkName: this.drinkName, alcohol: this.alcohol, ingredients: this.ingredients, recipe: this.recipe })
   .then(console.log)
   .then(callback);
 };
 
 Drinks.prototype.deleteRecord = function (callback) {
   $.ajax({
-    url: `/submission/${this.drink_id}`,
+    url: `/drinks/${this.drink_id}`,
     method: 'DELETE',
   })
   .then(console.log)
@@ -60,21 +60,18 @@ Drinks.prototype.deleteRecord = function (callback) {
 
 Drinks.prototype.updateRecord = function (callback) {
   $.ajax({
-    url: `/submission/${this.drink_id}`,
+    url: `/drinks/${this.drink_id}`,
     method: 'DELETE',
     data: {
       drinkName: this.drinkName,
       alcohol: this.alcohol,
-      mixer1: this.mixer1,
-      mixer2: this.mixer2,
-      instructions: this.instructions,
+      ingredients: this.ingredients,
+      recipe: this.recipe,
     },
   })
   .then(console.log)
   .then(callback);
 };
-
-
 
 module.Drinks = Drinks;
 })(window);

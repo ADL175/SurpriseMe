@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
+app.get('/login', (request, response) => response.sendFile('login.html', { root: './public' }));
 app.get('/', (request, response) => response.sendFile('index.html', { root: './public' }));
 app.get('/submission', (request, response) => response.sendFile('index.html', { root: './public' }));
 app.get('/about', (request, response) => response.sendFile('index.html', { root: './public' }));
@@ -68,7 +69,11 @@ app.get('/drinks', (request, response) => {
 
 //////// ** POST REQUESTS ** ////////
 ////////////////////////////////////////
-
+// app.post('/drinks', (request, response) => {
+//   client.query(
+//     'INSERT INTO drinks(drink_id, ingredients, recipe) SELECT drink_id, $1, $2, $3, $4 FROM '
+//   )
+// })
 
 //////// ** PUT REQUESTS ** ////////
 ////////////////////////////////////////

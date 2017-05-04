@@ -11,7 +11,7 @@
         type: 'text',
         placeholder: 'Drink Name',
         id: 'drink-name',
-        style: 'width: 20%',
+        style: 'width: 30%',
       })
     );
 
@@ -20,16 +20,16 @@
         type: 'text',
         placeholder: 'Alcohol Type',
         id: 'alcohol-name',
-        style: 'width 20%',
+        style: 'width: 30%',
       })
     );
 
     $form.append(
       $('<input>', {
         type: 'text',
-        placeholder: 'Mixer',
+        placeholder: 'Ingredients',
         id: 'ingredients',
-        style: 'width 20%',
+        style: 'width: 30%',
       })
     );
 
@@ -38,7 +38,7 @@
         type: 'text',
         placeholder: 'Recipe',
         id: 'recipe',
-        style: 'width: 20%',
+        style: 'width: 30%',
       })
     );
 
@@ -47,7 +47,7 @@
         type: 'submit',
         id: 'submit',
         name: 'submit',
-        style: 'width: 20%',
+        style: 'width: 30%',
       })
     );
 
