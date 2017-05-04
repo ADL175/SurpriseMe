@@ -6,7 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const drinkKey = '791f7bb8531446d09af4f98a22a06424';
-const conString = process.env.DATABASE_URL + 'drinks';
+const conString = process.env.DATABASE_URL;
 const client = new pg.Client(conString);
 const request = require('superagent');
 const drinksURL = 'https://addb.absolutdrinks.com/drinks/?apiKey=791f7bb8531446d09af4f98a22a06424';

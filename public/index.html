@@ -14,10 +14,24 @@
 ////////////////// -->
 
 
-<script id="option-template" type="text/x-handlebars-templage">
+<script id="option-template" type="text/x-handlebars-template">
   <option value="{{val}}">{{val}}</option>
 </script>
 
+
+<!-- ///////////////////
+///// HANDLEBARS FOR ABOUTVIEW
+////////////////// -->
+
+<script id="about-template" type="text/x-handlebars-template">
+  <section class="clearfix">
+    <header>
+      <h1 class ="teamMemberName">{{teamMember}}</h1>
+    </header>
+        <section class="teamMember-body">{{body}}</section>
+        <section class="teamMember-image">{{{img}}}</section>
+  </section>
+</script>
 
   </head>
   <body>
@@ -150,12 +164,13 @@
 <!-- ///////////////////
 ///// SCRIPTS
 ////////////////// -->
+<script src="/data/about.json"></script>
 <script src="/vendors/scripts/handlebars.js"></script>
 <script src="/vendors/scripts/page.js"></script>
 <script src="http://assets.absolutdrinks.com/api/addb-0.5.2.js" type="text/javascript"></script>
 
 <script src="/scripts/model/app.js"></script>
-
+<script src="/scripts/model/about.js"></script>
 <script src="/scripts/views/aboutView.js"></script>
 <script src="/scripts/views/generatorView.js"></script>
 <script src="/scripts/views/homeView.js"></script>
