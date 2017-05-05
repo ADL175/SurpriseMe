@@ -1,4 +1,8 @@
 
+.drink-glass {
+  width: 50%;
+}
+
 .nav a {
   float: right;
   /*list-style-type: none;*/

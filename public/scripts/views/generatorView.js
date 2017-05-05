@@ -14,24 +14,6 @@ let alcoholType = [];
     let template = Handlebars.compile($('#option-template').text());
     Drinks.fetchAll();
 
-    // console.log(Drinks.all);
-
-    //////// INGREDIENTS FILTERS ** ////////
-    ////////////////////////////////////////
-
-    Drinks.all.forEach(drink => {
-      let ing = drink.ingredients;
-      for (let i = 0; i < ing.length; i++) {
-        if (!uniqueIng.includes(ing[i].name)) {
-          // console.log(ing[i]);
-          uniqueIng.push(ing[i].name);
-        }
-      }
-    });
-    uniqueIng.sort().forEach(i => {
-      var option = new Option(i, i);
-      $('#ingredient-filter').append($(option));
-    });
 
     /////// ** DRINK NAMES FILTERS ** ////////
     ////////////////////////////////////////
@@ -73,19 +55,55 @@ let alcoholType = [];
     drinkSelect.forEach(a => $('#drink-data-section').append(render(a)));
     generatorView.populateFilters();
 
-    // generatorView.handleFilters();
   };
 
   //////// ** HANDLE  OPTIONS FILTERS ** ////////
   ////////////////////////////////////////
-  // generatorView.handleFilters = function(){
-  //   $('#filters').on('change', 'select', function( {
-  //     let resource = this.id.replace('-filter', '');
-  //     page(`/${resource}/${$(this).val().replace(/\W+/g, '+')}`);
-  //   }));
-  // };
+
+
+  generatorView.randomFilters = function(){
+    $('#random-drink').on('click',function(){
+      if($(this).val()){
+        let test = Drinks.all[Math.floor(Math.random() * Drinks.all.length)].name;
+        let thing = Drinks.all.filter(function(drink){
+          return drink.name === test;
+        })[0];
+        $('.drink-recipe').remove();
+        $('#drink-holder').append(thing.toHtml());
+        $('.drink-recipe').show();
+        $(`section[data-drink="${$(this).val()}"]`).fadeIn();
+      }
+      else {
+        $('section').fadeIn();
+        $('section.template').hide('');
+      }
+    });
+  };
+
+
+  generatorView.handleFilters = function(){
+    $('#drink-filter').on('change',function(){
+      if($(this).val()){
+        let test = $(this).val();
+        let thing = Drinks.all.filter(function(drink){
+          return drink.name === test;
+        })[0];
+        $('.drink-recipe').remove();
+        $('#drink-holder').append(thing.toHtml());
+        $('.drink-recipe').show();
+        $(`section[data-drink="${$(this).val()}"]`).fadeIn();
+      }
+      else {
+        $('section').fadeIn();
+        $('section.template').hide('');
+      }
+    });
+  };
+
 
   Drinks.fetchAll(generatorView.populateFilters);
 
-  // generatorView.handleFilters();
+  generatorView.handleFilters();
+  generatorView.randomFilters();
+
 })(window);
