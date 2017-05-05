@@ -1,0 +1,12 @@
+#pants-img:hover {
+    transform: rotate(10800deg);
+}
+
+#pants-img {
+    width: 50%;
+    transition: all 30s;
+}
+
+#pants-section {
+  text-align: center;
+}
