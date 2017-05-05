@@ -18,10 +18,9 @@
     this.name = drinkDataObj.name;
     this.recipe = drinkDataObj.recipe.split('||').slice(1);
     this.tools = drinkDataObj.tools.split('||').slice(1);
-    this.video = drinkDataObj.video.split('||').slice(1, 2).toString();
+    this.video = drinkDataObj.video.split('||').slice(1,2).toString();
     this.ingredients = drinkDataObj.ingredients.split('||').slice(1);
     this.youURL = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${this.video}" frameborder="0" allowfullscreen></iframe>`;
-
 
     // this.ingredients = this.ingredients.map(function(ing){
     //   return new Ingredients(ing.split(':'));
@@ -29,44 +28,43 @@
     this.image = `http://assets.absolutdrinks.com/drinks/transparent-background-white/${this.id}.png`;
   }
 
-  Drinks.loadAll = rows => {
 
+  Drinks.loadAll = rows => {
   Drinks.all = rows.map(ele => new Drinks(ele));
   // console.log(Drinks.all);
 };
 
-  Drinks.fetchAll = callback => {
-    console.log('sup');
-    $.get('/drinks')
-      .then(
-        results => {
-          console.log(results);
-          Drinks.loadAll(results);
-          callback();
-        }
-      );
-  };
+// Drinks.fetchAll = callback => {
+//   console.log('sup');
+//   $.get('/drinks')
+//   .then(
+//     results => {
+//       console.log(results);
+//       Drinks.loadAll(results);
+//       callback();
+//     }
+//   );
+// };
 
-  Drinks.allDrinks = () => {
-    return Drinks.all.map(drinks => drinks.name)
-      .reduce((drinkNames, drinkName) => {
-        if (names.indexOf(drinkName) === -1) drinkNames.push(drinkName);
-        return drinkNames;
-      }, []);
-  };
+Drinks.allDrinks = () => {
+  return Drinks.all.map(drinks => drinks.name)
+  .reduce((drinkNames, drinkName) => {
+    if (names.indexOf(drinkName) === -1)drinkNames.push(drinkName);
+    return drinkNames;
+  }, []);
+};
 
   Drinks.fetchAll = callback => {
     // console.log('sup');
     $.get('/drinks')
-      .then(
-        results => {
-          // console.log(results);
-          Drinks.loadAll(results);
-          // callback();
-        }
-      );
+    .then(
+      results => {
+        // console.log(results);
+        Drinks.loadAll(results);
+        callback();
+      }
+    )
   };
-
 //
 // Drinks.allDrinks = () => {
 //     return Drinks.all.map(drinks => drinks.name)
@@ -90,34 +88,40 @@ Drinks.prototype.toHtml = function () {
 //   $.get('/ingredients', callback);
 // };
 
-  Drinks.allIngredients = function (callback) {
-    $.get('/ingredients', callback);
-  };
+Drinks.prototype.insertRecord = function (callback) {
+  $.post('/drinks', { drinkName: this.drinkName, alcohol: this.alcohol, ingredients: this.ingredients, recipe: this.recipe })
+  .then(console.log)
+  .then(callback);
+};
 
+Drinks.prototype.deleteRecord = function (callback) {
+  $.ajax({
+    url: `/drinks/${this.drink_id}`,
+    method: 'DELETE',
+  })
+  .then(console.log)
+  .then(callback);
+};
 
-  Drinks.prototype.deleteRecord = function (callback) {
-    $.ajax({
-        url: `/drinks/${this.drink_id}`,
-        method: 'DELETE',
-      })
-      .then(console.log)
-      .then(callback);
-  };
+Drinks.prototype.updateRecord = function (callback) {
+  $.ajax({
+    url: `/drinks/${this.drink_id}`,
+    method: 'DELETE',
+    data: {
+      drinkName: this.drinkName,
+      alcohol: this.alcohol,
+      ingredients: this.ingredients,
+      recipe: this.recipe,
+    },
+  })
+  .then(console.log)
+  .then(callback);
+};
 
-  Drinks.prototype.updateRecord = function (callback) {
-    $.ajax({
-        url: `/drinks/${this.drink_id}`,
-        method: 'DELETE',
-        data: {
-          drinkName: this.drinkName,
-          alcohol: this.alcohol,
-          ingredients: this.ingredients,
-          recipe: this.recipe,
-        },
-      })
-      .then(console.log)
-      .then(callback);
-  };
+$(document).ready(function () {
+Drinks.prototype.toHtml(homeView.populateFilters)
+  $('.nav .tab:first').click();
+});
 
-  module.Drinks = Drinks;
+module.Drinks = Drinks;
 })(window);
