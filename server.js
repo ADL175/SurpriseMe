@@ -44,19 +44,22 @@ app.get('/drinks', (request, response) => {
 ////////////////////////////////////////
 app.post('/drinks', (request, response) => {
   client.query(
-    `INSERT INTO drinks(name, ingredients, recipe)
-    VALUES($1, $2, $3) ON CONFLICT DO NOTHING`,
-    [request.body.name, request.body.ingredients, request.body.recipe]
+    `INSERT INTO drinks(id, name, recipe, ingredients, tools, video)
+    VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING`,
+    [request.body.id, request.body.name, request.body.recipe, request.body.ingredients, request.body.tools, request.body.video]
   )
   .then(() => {
-    `INSERT INTO drinks(name, ingredients, recipe)
-    SELECT id, $1, $2, $3
-    WHERE drink_id=$5;
+    `INSERT INTO drinks(id, name, recipe, ingredients, tools, video)
+    SELECT id, $1, $2, $3, $4, $5, $6
+    WHERE drink_id=$7;
     `,
     [
+      request.body.id,
       request.body.name,
-      request.body.ingredients,
       request.body.recipe,
+      request.body.ingredients,
+      request.body.tools,
+      request.body.video,
     ];
   })
   .then(() => response.send('Insert Complete'))

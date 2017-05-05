@@ -1,9 +1,12 @@
 (function (module) {
 
 function Submit(submitObj) {
+  this.id = null;
   this.name = submitObj.name;
   this.ingredients = submitObj.ingredients;
   this.recipe = submitObj.recipe;
+  this.tool = null;
+  this.video = null;
 }
 
 Submit.prototype.toHtml = function () {
