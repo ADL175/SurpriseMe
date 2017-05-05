@@ -1,0 +1,126 @@
+
+.drink-glass {
+  width: 50%;
+}
+
+.about-img {
+  width: 20%;
+  border-radius: 100%;
+}
+
+.nav {
+  display: block;
+  clear: left;
+}
+
+.nav a {
+  float: right;
+  text-decoration: none;
+  padding: .7em;
+  margin: 0px;
+  font-weight: bold;
+  color: #10302C;
+}
+
+.nav a:hover {
+  float: right;
+  text-decoration: none;
+  padding: .7em;
+  margin: 0px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.logo {
+  size: 20%;
+  margin: 1vh;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
+
+.submission-box {
+  /*text-align: center;*/
+  width: 100%;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.submission-form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 30em;
+  margin: auto;
+  padding: 8em;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.drink-selection {
+text-align: center;
+margin-left: auto;
+}
+
+.drink-holder {
+  text-align: center;
+  margin: auto;
+}
+
+.drink-holder img {
+  width: 20%;
+}
+
+.gif-head {
+text-align: center;
+clear: right;
+}
+
+.drink-results {
+  display: block;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  margin: .5em 0;
+  border: 1px solid #ccc;
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+}
+
+textarea {
+  width: 100%;
+  margin: .5em 0;
+  font-size: 2em;
+  border: 1px solid #ccc;
+  border-radius: 0;
+}
+
+input:invalid, textarea:invalid {
+  border-color: #AE3F3C;
+}
+
+input:valid, textarea:valid {
+  border-color: #89CB8E;
+}
+
+.main-body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+@media only screen and (max-width: 640px) {
+   .nav a {
+
+   }
+
+   .nav a:hover {
+
+   }

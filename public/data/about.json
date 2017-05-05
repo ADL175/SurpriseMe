@@ -1,0 +1,22 @@
+[
+  {
+    "teamMember": "Bret Ladenburg & PantsShare Dreamer/Enthusiast",
+    "body": " Hello!  My name is Bret Ladenburg and I'm an aspiring web dev who is currently based in Seattle, WA.  After a successful career in Aquatics, I decided that it was time for a change and to do something which let me express a more creative side of myself.  To that end, I joined Code Fellows in early March and the rest is history.",
+    "img":"https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAh-AAAAJDA3NTM0ODEyLTlhODQtNDZlNi1hMjE5LTRlMWIyNDFiZDY0Zg.jpg"
+  },
+  {
+    "teamMember": "Brandon Holderman & Co Founder PantsShare",
+    "body": "Hello!  My name is Brandon Holderman, I wish this could have been a PantsShare app",
+    "img":"http://www.piedpiper.com/app/themes/pied-piper/dist/images/jared.png"
+  },
+  {
+    "teamMember": "David Lim, CEO & Founder PantsShare TM",
+    "body": "Hello!  My name is David, i'm a student at Code Fellows and I am learning software develpment to create my dream app Pants Share.",
+    "img":"http://siliconvalleyism.com/characters/jian-yang-small.jpg"
+  },
+  {
+    "teamMember": "Eric Enderlein, Principal Investor",
+    "body": "I invested in SurpriseMe and PantsShare because I believe in the power of dreams!",
+    "img":"http://www.piedpiper.com/app/themes/pied-piper/dist/images/bighead.png"
+  }
+]
