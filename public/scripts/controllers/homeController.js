@@ -3,6 +3,7 @@
 
   homeController.init = () => {
     $('#about-us-section').hide();
+    // $('login.html').hide();
     $('#submission-view').hide();
     $('#generated-drinks-section').hide();
     $('#drink-container').fadeIn(1500);

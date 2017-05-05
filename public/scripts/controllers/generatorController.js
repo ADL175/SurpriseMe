@@ -5,6 +5,7 @@
 
   generatorController.init = () => {
     $('#drink-container').hide();
+    // $('login.html').hide();
     $('#about-us-section').hide();
     $('#submission-view').hide();
     $('#generated-drinks-section').fadeIn(1500);

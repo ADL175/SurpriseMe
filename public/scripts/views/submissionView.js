@@ -155,7 +155,7 @@
   };
 
   newDrink.submit = function (event) {
-    event.preventDefault();
+    // event.preventDefault();
     let userDrink = new Submit({
       name: $('#drink-name').val(),
       ingredients: $('#ingredients').val(),
