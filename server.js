@@ -84,7 +84,7 @@ function loadDrinks() {
           drinkObj.id,
           drinkObj.name,
           drinkObj.ingredients.reduce(function(aggr,value){return aggr + '||' + value.textPlain;}, ''),
-          drinkObj.ingredients.reduce(function(aggr,value){return aggr + '||' + value.type + ':' + value.id;}, ''),
+          drinkObj.ingredients.reduce(function(aggr,value){return aggr + '||' + value.id;}, ''),
           drinkObj.tools.reduce(function(aggr,value){return aggr + '||' + value.text;}, ''),
           drinkObj.videos.reduce(function(aggr,value){return aggr + '||' + value.video;}, '')
 

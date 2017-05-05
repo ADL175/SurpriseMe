@@ -15,9 +15,9 @@ homeView.populateFilters = function () {
   let template = Handlebars.compile($('#drink-template').text());
 
   // Drinks.fetchAll();
-  console.log(Drinks.all);
+  // console.log(Drinks.all);
   Drinks.all.map(ele => {
-    console.log(ele);
+    // console.log(ele);
     $('#drink-filter').append(ele);
   });
 
@@ -36,12 +36,7 @@ homeView.populateFilters = function () {
 
 //////// ** HANDLE  OPTIONS FILTERS ** ////////
 ////////////////////////////////////////
-// homeView.handleFilters = function(){
-//   $('#filters').one('change', 'select', function( {
-//     let resource = this.id.replace('-filter', '');
-//     page(`/${resource}/${$(this).val().replace(/\W+/g, '+')}`);
-//   }));
-// };
+
 Drinks.fetchAll(homeView.populateFilters);
 
 module.homeView = homeView;
