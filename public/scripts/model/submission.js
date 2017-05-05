@@ -5,8 +5,8 @@ function Submit(submitObj) {
   this.name = submitObj.name;
   this.ingredients = submitObj.ingredients;
   this.recipe = submitObj.recipe;
-  this.tool = null;
-  this.video = null;
+  this.tools = 'Shaker, glass, attitude';
+  this.video = 'no video';
 }
 
 Submit.prototype.toHtml = function () {
@@ -16,9 +16,12 @@ Submit.prototype.toHtml = function () {
 
 Submit.prototype.insertRecord = function (callback) {
   $.post('/drinks', {
+      id: this.name,
       name: this.name,
-      ingredients: this.ingredients,
       recipe: this.recipe,
+      ingredients: this.ingredients,
+      tools: this.tool,
+      video: this.video,
     })
     .then(res => {
       console.log(res);

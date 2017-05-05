@@ -41,6 +41,8 @@ app.get('/drinks', (request, response) => {
 //////// ** POST REQUESTS ** ////////
 ////////////////////////////////////////
 app.post('/drinks', (request, response) => {
+  console.log(request.body);
+  console.log('hi this is post');
   client.query(
     `INSERT INTO drinks(id, name, recipe, ingredients, tools, video)
     VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING`,
