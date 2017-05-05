@@ -3,6 +3,11 @@
   width: 50%;
 }
 
+.nav {
+  display: block;
+  clear: left;
+}
+
 .nav a {
   float: right;
   text-decoration: none;
@@ -24,9 +29,13 @@
 .logo {
   size: 20%;
   margin: 1vh;
+  position: absolute;
+  top: 1%;
+  left: 1%;
 }
 
 .submission-box {
+  /*text-align: center;*/
   width: 100%;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -36,7 +45,7 @@
   z-index: 1;
   background: #FFFFFF;
   max-width: 30em;
-  margin: .5em 13.5em 100px;
+  margin: auto;
   padding: 8em;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -47,15 +56,15 @@
   justify-content: center;
 }
 
-iframe {
-  margin-left: 0em
+.gif-head {
+text-align: center;
+clear: right;
 }
 
 .drink-results {
   display: block;
   align-items: center;
 }
-
 
 input {
   width: 100%;
