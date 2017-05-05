@@ -63,27 +63,6 @@ let alcoholType = [];
   //////// ** HANDLE  OPTIONS FILTERS ** ////////
   ////////////////////////////////////////
 
-
-  // generatorView.randomFilters = function(){
-  //   $('#random-drink').on('click',function(){
-  //     if($(this).val()){
-  //       let test = Drinks.all[Math.floor(Math.random() * Drinks.all.length)].name;
-  //       let thing = Drinks.all.filter(function(drink){
-  //         return drink.name === test;
-  //       })[0];
-  //       $('.drink-recipe').remove();
-  //       $('#drink-holder').append(thing.toHtml());
-  //       $('.drink-recipe').show();
-  //       $(`section[data-drink="${$(this).val()}"]`).fadeIn();
-  //     }
-  //     else {
-  //       $('section').fadeIn();
-  //       $('section.template').hide('');
-  //     }
-  //   });
-  // };
-
-
   generatorView.handleFilters = function(){
     console.log('this is filters');
     $('#drink-filter').on('change',function(){
