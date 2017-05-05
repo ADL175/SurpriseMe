@@ -8,7 +8,7 @@
   function Ingredients(data) {
     this.type = data[0];
     this.name = data[1];
-    console.log(this.type);
+    // console.log(this.type);
 
     // Ingredients.all.push()
   }
@@ -60,38 +60,15 @@
         results => {
           // console.log(results);
           Drinks.loadAll(results);
-          callback();
+          // callback();
         }
       );
   };
-
-  //
-  // Drinks.allDrinks = () => {
-  //     return Drinks.all.map(drinks => drinks.name)
-  //     .reduce((drinkNames, drinkName)=>{
-  //       if(names.indexOf(drinkName)=== -1)drinkNames.push(drinkName);
-  //       return drinkNames;
-  //     }, []);
-  // };
-  // Drinks.prototype.toHtml = function () {
-  //   let template = Handlebars.compile($('#form-template').text());
-  //   return template(this);
-  // };
 
   Drinks.allIngredients = function (callback) {
     $.get('/ingredients', callback);
   };
 
-  Drinks.prototype.insertRecord = function (callback) {
-    $.post('/drinks', {
-        drinkName: this.drinkName,
-        alcohol: this.alcohol,
-        ingredients: this.ingredients,
-        recipe: this.recipe,
-      })
-      .then(console.log)
-      .then(callback);
-  };
 
   Drinks.prototype.deleteRecord = function (callback) {
     $.ajax({
@@ -116,11 +93,6 @@
       .then(console.log)
       .then(callback);
   };
-
-  // $(document).ready(function () {
-  //   Submit.prototype.toHtml(homeView.populateFilters);
-  //   $('.nav .tab:first').click();
-  // });
 
   module.Drinks = Drinks;
 })(window);

@@ -36,22 +36,35 @@ app.get('/drinks', (request, response) => {
 
       console.log(result.rows);
       response.send(result.rows);
-    }
-  )
+    })
   .catch(console.error);
 });
 
 //////// ** POST REQUESTS ** ////////
 ////////////////////////////////////////
-// app.post('/drinks', (request, response) => {
-//   client.query(
-//     'INSERT INTO drinks(drink_id, ingredients, recipe) SELECT drink_id, $1, $2, $3, $4 FROM '
-//   )
-// })
+app.post('/drinks', (request, response) => {
+  client.query(
+    `INSERT INTO drinks(name, ingredients, recipe)
+    VALUES($1, $2, $3) ON CONFLICT DO NOTHING`,
+    [request.body.name, request.body.ingredients, request.body.recipe]
+  )
+  .then(() => {
+    `INSERT INTO drinks(name, ingredients, recipe)
+    SELECT id, $1, $2, $3
+    WHERE drink_id=$5;
+    `,
+    [
+      request.body.name,
+      request.body.ingredients,
+      request.body.recipe,
+    ];
+  })
+  .then(() => response.send('Insert Complete'))
+  .catch(console.log)
+});
 
 //////// ** PUT REQUESTS ** ////////
 ////////////////////////////////////////
-
 
 //////// ** DELETE REQUESTS ** ////////
 ////////////////////////////////////////
