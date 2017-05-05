@@ -10,20 +10,24 @@ let alcoholType = [];
   Drinks.all.forEach;
 
   generatorView.populateFilters = function () {
+    console.log('this was run');
+    $('#drink-filter').children().remove();
+    $('#drink-filter').append('<option> CHOOSE YOUR DRINK </option>');
     let template = Handlebars.compile($('#option-template').text());
-    Drinks.fetchAll();
+    Drinks.fetchAll(function () {
+      drinkName = [];
+      console.log('populating filters now');
+      console.log(Drinks.all);
+      Drinks.all.forEach(drink => {
+        drinkName.push(drink.name);
+      });
+      drinkName.sort().forEach(i => {
+        var option = new Option(i, i);
+        $('#drink-filter').append($(option));
+      });
+    });
 
     /////// ** DRINK NAMES FILTERS ** ////////
-
-    Drinks.all.forEach(drink => {
-      drinkName.push(drink.name);
-    });
-    drinkName.sort().forEach(i => {
-      var option = new Option(i, i);
-      $('#drink-filter').append($(option));
-    });
-
-
 
     Drinks.allDrinks(function (rows) {
       if ($('#drink-filter option').length < 2) {

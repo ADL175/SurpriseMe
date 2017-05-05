@@ -52,8 +52,17 @@
 }
 
 .drink-selection {
-  display: flex;
-  justify-content: center;
+text-align: center;
+margin-left: auto;
+}
+
+.drink-holder {
+  text-align: center;
+  margin: auto;
+}
+
+.drink-holder img {
+  width: 20%;
 }
 
 .gif-head {

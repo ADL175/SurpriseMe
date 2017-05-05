@@ -2,6 +2,7 @@
 (function(module) {
 
   About.all = [];
+
   function About(aboutObj) {
     this.teamMember = aboutObj.teamMember;
     this.body = aboutObj.body;
@@ -14,16 +15,20 @@
   }
 
   About.fetchAbout = function(callback) {
-    $.getJSON('/data/about.json')
-    .then(
-      function(results) {
-        console.log(results);
-        results.forEach(function(ele) {
-          About.all.push(new About(ele));
-        });
-        callback();
-      }
-    );
+    if (About.all.length < 3) {
+      $.getJSON('/data/about.json')
+        .then(
+          function(results) {
+            console.log(results);
+            results.forEach(function(ele) {
+              About.all.push(new About(ele));
+            });
+
+            callback();
+          }
+        );
+    }
   };
+
   module.About = About;
 })(window);

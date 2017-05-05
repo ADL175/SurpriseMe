@@ -5,7 +5,7 @@ function Submit(submitObj) {
   this.name = submitObj.name;
   this.ingredients = submitObj.ingredients;
   this.recipe = submitObj.recipe;
-  this.tools = 'Shaker || glass || attitude';
+  this.tools = 'Glass || Shaker || Attitude || Will';
   this.video = 'no video';
 }
 
@@ -28,7 +28,7 @@ Submit.prototype.insertRecord = function (callback) {
       return res;
     })
     .then(callback)
-    // .then(generatorView.populateFilters)
+    .then(generatorView.populateFilters)
     .catch(console.error);
 };
 

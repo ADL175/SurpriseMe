@@ -5,7 +5,7 @@
   Drinks.all = [];
 
   function Drinks(drinkDataObj) {
-    console.log(drinkDataObj);
+    // console.log(drinkDataObj);
     this.id = drinkDataObj.id;
     this.name = drinkDataObj.name;
     this.recipe = drinkDataObj.recipe.split('||').slice(1);
@@ -26,7 +26,7 @@
   Drinks.allDrinks = () => {
     return Drinks.all.map(drinks => drinks.name)
       .reduce((drinkNames, drinkName) => {
-        if (names.indexOf(drinkName) === -1) drinkNames.push(drinkName);
+        if (name.indexOf(drinkName) === -1) drinkNames.push(drinkName);
         return drinkNames;
       }, []);
   };

@@ -32,7 +32,7 @@ app.get('/drinks', (request, response) => {
   .then(
     result => {
 
-      console.log(result.rows);
+      // console.log(result.rows);
       response.send(result.rows);
     })
   .catch(console.error);
@@ -48,20 +48,7 @@ app.post('/drinks', (request, response) => {
     VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING`,
     [request.body.id, request.body.name, request.body.recipe, request.body.ingredients, request.body.tools, request.body.video]
   )
-  .then(() => {
-    `INSERT INTO drinks(id, name, recipe, ingredients, tools, video)
-    SELECT id, $1, $2, $3, $4, $5, $6
-    WHERE drink_id=$7;
-    `,
-    [
-      request.body.id,
-      request.body.name,
-      request.body.recipe,
-      request.body.ingredients,
-      request.body.tools,
-      request.body.video,
-    ];
-  })
+
   .then(() => response.send('Insert Complete'))
   .catch(console.log)
 });
@@ -86,7 +73,7 @@ app.listen(PORT, function () {
 ////////////////////////////////////////
 
 function loadDrinks() {
-  console.log('load drinks says hi');
+  // console.log('load drinks says hi');
   request.get(drinksURL)
   .then(results => {
     let drinksData = results.body.result;
@@ -125,7 +112,7 @@ function loadDB() {
       recipe VARCHAR(1024) NOT NULL,
       ingredients VARCHAR(1024) NOT NULL,
       tools VARCHAR(1024) NOT NULL,
-      video VARCHAR(1024) UNIQUE NOT NULL
+      video VARCHAR(1024) NOT NULL
         );
     `)
 
