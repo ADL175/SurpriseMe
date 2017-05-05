@@ -22,7 +22,7 @@ app.get('/login', (request, response) => response.sendFile('login.html', { root:
 app.get('/submission', (request, response) => response.sendFile('index.html', { root: './public' }));
 app.get('/about', (request, response) => response.sendFile('index.html', { root: './public' }));
 
-//////// ** GET REQUESTS ** ////////
+//////// ** GET REQUESTS ** ///////
 
 app.get('/drinks', (request, response) => {
   client.query(
