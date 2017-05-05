@@ -23,10 +23,8 @@ app.get('/submission', (request, response) => response.sendFile('index.html', { 
 app.get('/about', (request, response) => response.sendFile('index.html', { root: './public' }));
 
 //////// ** GET REQUESTS ** ////////
-////////////////////////////////////////
 
 app.get('/drinks', (request, response) => {
-  console.log('wassup');
   client.query(
     `SELECT *
     FROM drinks;`

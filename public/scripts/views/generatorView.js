@@ -1,5 +1,4 @@
 //////// ** DRINK / ING OPTIONS FILTERS ** ////////
-////////////////////////////////////////
 
 let uniqueIng = [];
 let drinkName = [];
@@ -11,13 +10,10 @@ let alcoholType = [];
   Drinks.all.forEach;
 
   generatorView.populateFilters = function () {
-    console.log('this is populate');
     let template = Handlebars.compile($('#option-template').text());
     Drinks.fetchAll();
 
-
     /////// ** DRINK NAMES FILTERS ** ////////
-    ////////////////////////////////////////
 
     Drinks.all.forEach(drink => {
       drinkName.push(drink.name);
@@ -42,7 +38,6 @@ let alcoholType = [];
     // });
 
     Drinks.allDrinks(function (rows) {
-      console.log('this is all drinks');
       if ($('#drink-filter option').length < 2) {
         $('#drink-filter').append(rows.map(row => template({
           val: row.drinks,
@@ -52,7 +47,6 @@ let alcoholType = [];
   };
 
   generatorView.index = function (drinkSelect) {
-    console.log('this is gen view index');
     //   $('#drink-data-section').show().siblings().hide();
     // $('#drink-data-section div').remove();
     drinkSelect.forEach(a => $('#drink-data-section').append(render(a)));
@@ -61,10 +55,8 @@ let alcoholType = [];
   };
 
   //////// ** HANDLE  OPTIONS FILTERS ** ////////
-  ////////////////////////////////////////
 
   generatorView.handleFilters = function(){
-    console.log('this is filters');
     $('#drink-filter').on('change',function(){
       if($(this).val()){
         let test = $(this).val();
@@ -82,7 +74,6 @@ let alcoholType = [];
       }
     });
   };
-
 
   Drinks.fetchAll(generatorView.populateFilters);
 

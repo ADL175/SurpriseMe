@@ -2,9 +2,9 @@
   const aboutController = {};
 
   aboutController.init = () => {
-    $('#drink-selection').hide();
+    $('#drink-container').hide();
     $('#generated-drinks-section').hide();
-    $('#submission-post-selection').hide();
+    $('#submission-view').hide();
     $('#about-us-section').fadeIn(1500);
   };
 

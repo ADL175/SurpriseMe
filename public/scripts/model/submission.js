@@ -15,7 +15,6 @@ Submit.prototype.toHtml = function () {
 };
 
 Submit.prototype.insertRecord = function (callback) {
-  console.log('hi this is post');
   $.post('/drinks', {
       name: this.name,
       ingredients: this.ingredients,

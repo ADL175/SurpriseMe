@@ -94,11 +94,11 @@
   const newDrink = {};
 
   newDrink.createForm = function () {
-    var $form = $('<div>', {
+    var $formContent = $('<div>', {
       action: '/submission',
     });
 
-    $form.append(
+    $formContent.append(
       $('<input>', {
         type: 'text',
         placeholder: 'Drink Name',
@@ -106,7 +106,7 @@
       })
     );
 
-    $form.append(
+    $formContent.append(
       $('<input>', {
         type: 'text',
         placeholder: 'Ingredients',
@@ -114,7 +114,7 @@
       })
     );
 
-    $form.append(
+    $formContent.append(
       $('<textarea>', {
         type: 'text',
         placeholder: 'Recipe',
@@ -122,7 +122,7 @@
       })
     );
 
-    $form.append(
+    $formContent.append(
       $('<input>', {
         type: 'submit',
         id: 'submit',
@@ -130,11 +130,10 @@
       })
     );
 
-    $('#submission-post-section').append($form);
+    $('#submission-post-section').append($formContent);
   };
 
   newDrink.initNewDrinkPage = function () {
-    console.log('init new drink');
     $('.submission').show();
     $('#export-field').hide();
     $('#drink-json').on('focus', function () {
@@ -146,7 +145,6 @@
   };
 
   newDrink.create = function () {
-    console.log('create function');
     $('#user-drinks').empty();
     let formDrink = new Submit({
       name: $('#drink-name').val(),
@@ -157,7 +155,6 @@
   };
 
   newDrink.submit = function (event) {
-    console.log('handle submit');
     event.preventDefault();
     let userDrink = new Submit({
       name: $('#drink-name').val(),
