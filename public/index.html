@@ -7,13 +7,12 @@
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/login.css">
   <title>Surprise Me</title>
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <head>
 
-  <!-- HANDLEBARS USER SUB -->
+<!-- HANDLEBARS USER SUB -->
   <script id="drink-recipe-template" type="text/x-handlebars-template">
     <section class="drink-recipe" class="tab-content" data-drink="{{name}}">
       <section class="data">
@@ -28,7 +27,7 @@
     </section>
   </script>
 
-  <!-- HANDLEBARS DRINK PAGE -->
+<!-- HANDLEBARS DRINK PAGE -->
   <script id="form-template" type="text/x-handlebars-template">
     <section class="userDrink" class="tab-content">
       <section class="data">
@@ -39,12 +38,12 @@
     </section>
   </script>
 
-  <!-- HANDLEBARS FOR FILTERS -->
+<!-- HANDLEBARS FOR FILTERS -->
   <script id="option-template" type="text/x-handlebars-templage">
     <option value="{{val}}">{{val}}</option>
   </script>
 
-  <!-- HANDLEBARS FOR ABOUTVIEW -->
+<!-- HANDLEBARS FOR ABOUTVIEW -->
   <script id="about-template" type="text/x-handlebars-template">
     <section class="clearfix">
       <header>
@@ -56,10 +55,12 @@
   </script>
 </head>
 
+<!-- MAIN BODY FOR HTML  -->
+
 <body>
   <div class="main-body">
   <header>
-    <!-- NAV -->
+<!-- NAVIGATION BAR -->
     <div class="nav">
       <nav id="main-nav">
         <ul>
@@ -72,13 +73,11 @@
     </div>
     <div class="header">
       <img src="/images/header.png" class="logo">
-      <iframe src="//giphy.com/embed/uddDNZtt72kBW" width="736" height="280" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-        <a href="https://giphy.com/gifs/fun-high-quality-bartender-uddDNZtt72kBW"></a>
-    </div>
+ <iframe src="//giphy.com/embed/uddDNZtt72kBW" width="736" height="280" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>   </div>
   </header>
   <main>
 
-    <!-- DRINK DATA SECTION -->
+<!-- DRINK DATA SECTION -->
 
     <div id="drink-container">
       <section id="drink-selection" class="drink-selection">
@@ -86,22 +85,21 @@
           <div class="">
             <h2>FEELING THIRSTY?</h2>
 
-            <!-- DRINK FILTER -->
+<!-- DRINK FILTER -->
             <ul id="filters">
                 <select id="drink-filter">
                   <option> CHOOSE YOUR DRINK </option>
                 </select>
               </ul>
 
-            <!-- <button id="random-drink">SURPRISE ME</button> -->
-
+<!-- DRINK DATA SECTION -->
             <div id="drink-holder" class="drink-results"></div>
         </section>
         </div>
       </section>
     </div>
 
-    <!-- USER SUBMISSION SECTION -->
+<!-- USER SUBMISSION SECTION -->
     <section id="submission-view">
       <div class="submission-box">
         <div class="submission-form">
@@ -110,19 +108,14 @@
         </div>
       </div>
     </section>
-    <!-- ABOUT US SECTION -->
+
+<!-- ABOUT US SECTION -->
 
     <section id="about-us-section"></section>
 
-    <!-- Generated Drinks -->
-    <!-- <section id="generated-drinks-section"></section> -->
-
   </main>
 
-  <!-- FOOTER -->
-  <footer></footer>
-  </div>
-  <!-- SCRIPTS -->
+<!-- SCRIPTS -->
   <script src="/data/about.json"></script>
   <script src="/vendors/scripts/handlebars.js"></script>
   <script src="/vendors/scripts/page.js"></script>

@@ -23,19 +23,7 @@ let alcoholType = [];
       $('#drink-filter').append($(option));
     });
 
-    // Drinks.all.forEach(drink => {
-    //   let alch = drink.alcoholType;
-    //   for (let i = 0; i < alch.length; i++) {
-    //     // if (!alcoholType.includes(alch[i])) {
-    //       // console.log(ing[i]);
-    //       uniqueIng.push(ing[i].name);
-    //     // }
-    //   }
-    // });
-    // uniqueIng.sort().forEach(i => {
-    //   var option = new Option(i, i);
-    //   $('#ingredient-filter').append($(option));
-    // });
+
 
     Drinks.allDrinks(function (rows) {
       if ($('#drink-filter option').length < 2) {
@@ -47,8 +35,6 @@ let alcoholType = [];
   };
 
   generatorView.index = function (drinkSelect) {
-    //   $('#drink-data-section').show().siblings().hide();
-    // $('#drink-data-section div').remove();
     drinkSelect.forEach(a => $('#drink-data-section').append(render(a)));
     generatorView.populateFilters();
 
@@ -78,7 +64,6 @@ let alcoholType = [];
   Drinks.fetchAll(generatorView.populateFilters);
 
   generatorView.handleFilters();
-  // generatorView.randomFilters();
   module.Drinks = Drinks;
 
 })(window);

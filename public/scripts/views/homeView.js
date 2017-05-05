@@ -3,10 +3,6 @@
 
 const homeView = {};
 
-// const render = function(drink){
-//   let template = Handlebars.compile($('#drink-template').text());
-//   return template(drink);
-// };
 
 //////// ** DRINK / ING OPTIONS FILTERS ** ////////
 ////////////////////////////////////////
@@ -14,18 +10,11 @@ const homeView = {};
 homeView.populateFilters = function () {
   let template = Handlebars.compile($('#drink-template').text());
 
-  // Drinks.fetchAll();
-  // console.log(Drinks.all);
+
   Drinks.all.map(ele => {
-    // console.log(ele);
     $('#drink-filter').append(ele);
   });
 
-  // let options = Drinks.allDrinks().map(drink =>{
-  //   console.log(drink);
-  // }
-  //  template({val:drink})
-  //  );
 
   Drinks.allIngredients(function (rows) {
     if ($('#ingredient-filter option').length < 2) {
@@ -41,5 +30,4 @@ Drinks.fetchAll(homeView.populateFilters);
 
 module.homeView = homeView;
 
-// homeView.handleFilters();
 })(window);
