@@ -5,7 +5,7 @@ function Submit(submitObj) {
   this.name = submitObj.name;
   this.ingredients = submitObj.ingredients;
   this.recipe = submitObj.recipe;
-  this.tools = 'Shaker, glass, attitude';
+  this.tools = 'Shaker || glass || attitude';
   this.video = 'no video';
 }
 
@@ -20,7 +20,7 @@ Submit.prototype.insertRecord = function (callback) {
       name: this.name,
       recipe: this.recipe,
       ingredients: this.ingredients,
-      tools: this.tool,
+      tools: this.tools,
       video: this.video,
     })
     .then(res => {
@@ -28,6 +28,7 @@ Submit.prototype.insertRecord = function (callback) {
       return res;
     })
     .then(callback)
+    // .then(generatorView.populateFilters)
     .catch(console.error);
 };
 

@@ -5,6 +5,7 @@
   Drinks.all = [];
 
   function Drinks(drinkDataObj) {
+    console.log(drinkDataObj);
     this.id = drinkDataObj.id;
     this.name = drinkDataObj.name;
     this.recipe = drinkDataObj.recipe.split('||').slice(1);

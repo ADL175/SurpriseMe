@@ -65,5 +65,6 @@ let alcoholType = [];
 
   generatorView.handleFilters();
   module.Drinks = Drinks;
+  module.generatorView = generatorView;
 
 })(window);
