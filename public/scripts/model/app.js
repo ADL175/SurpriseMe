@@ -34,17 +34,17 @@
   // console.log(Drinks.all);
 };
 
-Drinks.fetchAll = callback => {
-  console.log('sup');
-  $.get('/drinks')
-  .then(
-    results => {
-      console.log(results);
-      Drinks.loadAll(results);
-      callback();
-    }
-  );
-};
+// Drinks.fetchAll = callback => {
+//   console.log('sup');
+//   $.get('/drinks')
+//   .then(
+//     results => {
+//       console.log(results);
+//       Drinks.loadAll(results);
+//       callback();
+//     }
+//   );
+// };
 
 Drinks.allDrinks = () => {
   return Drinks.all.map(drinks => drinks.name)
