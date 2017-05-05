@@ -6,7 +6,7 @@
 
   aboutView.initAboutPage = function() {
     About.all.forEach(function(about){
-      console.log(about);
+      // console.log(about);
       $('#about-us-section').append(about.toHtml());
 });
 }

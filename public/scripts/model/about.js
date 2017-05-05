@@ -17,6 +17,7 @@
     $.getJSON('/data/about.json')
     .then(
       function(results) {
+        console.log(results);
         results.forEach(function(ele) {
           About.all.push(new About(ele));
         });

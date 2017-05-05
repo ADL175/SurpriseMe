@@ -2,6 +2,7 @@
   const aboutController = {};
 
   aboutController.init = () => {
+    About.fetchAbout(aboutView.initAboutPage);
     $('#drink-container').hide();
     // $('login.html').hide();
     $('#generated-drinks-section').hide();
