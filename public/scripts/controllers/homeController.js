@@ -8,6 +8,6 @@
     $('#drink-container').fadeIn(1500);
   };
 
-  Drinks.prototype.toHtml(homeView.populateFilters)
+  Submit.prototype.toHtml(homeView.populateFilters)
   module.homeController = homeController;
 })(window);
