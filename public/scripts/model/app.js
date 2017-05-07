@@ -1,11 +1,10 @@
 'use strict';
 
-(function(module) {
+(function (module) {
 
   Drinks.all = [];
 
   function Drinks(drinkDataObj) {
-    // console.log(drinkDataObj);
     this.id = drinkDataObj.id;
     this.name = drinkDataObj.name;
     this.recipe = drinkDataObj.recipe.split('||').slice(1);
@@ -17,10 +16,8 @@
     this.image = `http://assets.absolutdrinks.com/drinks/transparent-background-white/${this.id}.png`;
   }
 
-
   Drinks.loadAll = rows => {
     Drinks.all = rows.map(ele => new Drinks(ele));
-    // console.log(Drinks.all);
   };
 
   Drinks.allDrinks = () => {
@@ -32,37 +29,33 @@
   };
 
   Drinks.fetchAll = callback => {
-    // console.log('sup');
     $.get('/drinks')
       .then(
         results => {
-          // console.log(results);
           Drinks.loadAll(results);
           callback();
         }
-      )
+      );
   };
 
   //DRINKS TO HTML
-  Drinks.prototype.toHtml = function() {
-    // console.log(this);
+  Drinks.prototype.toHtml = function () {
     let template = Handlebars.compile($('#drink-recipe-template').text());
-    // console.log(template(this));
     return template(this);
   };
 
-  Drinks.prototype.insertRecord = function(callback) {
+  Drinks.prototype.insertRecord = function (callback) {
     $.post('/drinks', {
         drinkName: this.drinkName,
         alcohol: this.alcohol,
         ingredients: this.ingredients,
-        recipe: this.recipe
+        recipe: this.recipe,
       })
       .then(console.log)
       .then(callback);
   };
 
-  Drinks.prototype.deleteRecord = function(callback) {
+  Drinks.prototype.deleteRecord = function (callback) {
     $.ajax({
         url: `/drinks/${this.drink_id}`,
         method: 'DELETE',
@@ -71,7 +64,7 @@
       .then(callback);
   };
 
-  Drinks.prototype.updateRecord = function(callback) {
+  Drinks.prototype.updateRecord = function (callback) {
     $.ajax({
         url: `/drinks/${this.drink_id}`,
         method: 'DELETE',
@@ -86,8 +79,8 @@
       .then(callback);
   };
 
-  $(document).ready(function() {
-    Drinks.prototype.toHtml(homeView.populateFilters)
+  $(document).ready(function () {
+    Drinks.prototype.toHtml(homeView.populateFilters);
     $('.nav .tab:first').click();
   });
 

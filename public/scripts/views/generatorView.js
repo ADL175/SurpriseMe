@@ -1,3 +1,5 @@
+'use strict';
+
 //////// ** DRINK / ING OPTIONS FILTERS ** ////////
 
 let uniqueIng = [];
@@ -46,19 +48,19 @@ let alcoholType = [];
 
   //////// ** HANDLE  OPTIONS FILTERS ** ////////
 
-  generatorView.handleFilters = function(){
-    $('#drink-filter').on('change',function(){
-      if($(this).val()){
+  generatorView.handleFilters = function () {
+    $('#drink-filter').on('change', function () {
+      if ($(this).val()) {
         let test = $(this).val();
-        let thing = Drinks.all.filter(function(drink){
+        let thing = Drinks.all.filter(function (drink) {
           return drink.name === test;
         })[0];
+
         $('.drink-recipe').remove();
         $('#drink-holder').append(thing.toHtml());
         $('.drink-recipe').show();
         $(`section[data-drink="${$(this).val()}"]`).fadeIn();
-      }
-      else {
+      } else {
         $('section').fadeIn();
         $('section.template').hide('');
       }

@@ -14,95 +14,92 @@ client.connect();
 client.on('error', console.error);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
 app.use(express.static('./public'));
 
-app.get('/', (request, response) => response.sendFile('index.html', { root: './public' }));
-app.get('/login', (request, response) => response.sendFile('login.html', { root: './public' }));
-app.get('/submission', (request, response) => response.sendFile('index.html', { root: './public' }));
-app.get('/about', (request, response) => response.sendFile('index.html', { root: './public' }));
+app.get('/', (request, response) => response.sendFile('index.html', {
+  root: './public',
+}));
+app.get('/login', (request, response) => response.sendFile('login.html', {
+  root: './public',
+}));
+app.get('/submission', (request, response) => response.sendFile('index.html', {
+  root: './public',
+}));
+app.get('/about', (request, response) => response.sendFile('index.html', {
+  root: './public',
+}));
 
 //////// ** GET REQUESTS ** ///////
 
 app.get('/drinks', (request, response) => {
   client.query(
-    `SELECT *
+      `SELECT *
     FROM drinks;`
-  )
-  .then(
-    result => {
-
-      // console.log(result.rows);
-      response.send(result.rows);
-    })
-  .catch(console.error);
+    )
+    .then(
+      result => {
+        response.send(result.rows);
+      })
+    .catch(console.error);
 });
 
 //////// ** POST REQUESTS ** ////////
-////////////////////////////////////////
+
 app.post('/drinks', (request, response) => {
   console.log(request.body);
   console.log('hi this is post');
   client.query(
-    `INSERT INTO drinks(id, name, recipe, ingredients, tools, video)
-    VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING`,
-    [request.body.id, request.body.name, request.body.recipe, request.body.ingredients, request.body.tools, request.body.video]
-  )
+      `INSERT INTO drinks(id, name, recipe, ingredients, tools, video)
+    VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING`, [request.body.id, request.body.name, request.body.recipe, request.body.ingredients, request.body.tools, request.body.video]
+    )
 
-  .then(() => response.send('Insert Complete'))
-  .catch(console.log)
+    .then(() => response.send('Insert Complete'))
+    .catch(console.log);
 });
-
-//////// ** PUT REQUESTS ** ////////
-////////////////////////////////////////
-
-//////// ** DELETE REQUESTS ** ////////
-////////////////////////////////////////
-
-
-
 
 app.listen(PORT, function () {
   console.log(`Your server is now running on port ${PORT}`);
 });
 
 //////// ** DATABASE LOADERS ** ////////
-////////////////////////////////////////
-
-//////// ** LOAD DRINKS TO DRINKS TABLE ** ////////
-////////////////////////////////////////
 
 function loadDrinks() {
-  // console.log('load drinks says hi');
   request.get(drinksURL)
-  .then(results => {
-    let drinksData = results.body.result;
-    drinksData.map(drinkObj => {
-      client.query(
-        `INSERT INTO
+    .then(results => {
+      let drinksData = results.body.result;
+      drinksData.map(drinkObj => {
+        client.query(
+          `INSERT INTO
         drinks(id, name, recipe, ingredients, tools, video)
         VALUES ($1, $2, $3, $4, $5, $6)
-        ON CONFLICT DO NOTHING`,
-        [
-          drinkObj.id,
-          drinkObj.name,
-          drinkObj.ingredients.reduce(function(aggr,value){return aggr + '||' + value.textPlain;}, ''),
-          drinkObj.ingredients.reduce(function(aggr,value){return aggr + '||' + value.id;}, ''),
-          drinkObj.tools.reduce(function(aggr,value){return aggr + '||' + value.text;}, ''),
-          drinkObj.videos.reduce(function(aggr,value){return aggr + '||' + value.video;}, '')
+        ON CONFLICT DO NOTHING`, [
+            drinkObj.id,
+            drinkObj.name,
+            drinkObj.ingredients.reduce(function(aggr, value) {
+              return aggr + '||' + value.textPlain;
+            }, ''),
+            drinkObj.ingredients.reduce(function(aggr, value) {
+              return aggr + '||' + value.id;
+            }, ''),
+            drinkObj.tools.reduce(function(aggr, value) {
+              return aggr + '||' + value.text;
+            }, ''),
+            drinkObj.videos.reduce(function(aggr, value) {
+              return aggr + '||' + value.video;
+            }, ''),
 
-        ]
-      )
-      }) //ends the drinksdata.map
-    }) //ends the first .then
-    // .catch(console.error);
-  } //ends main function
+          ]
+        );
+      });
+    });
+};
 
 //////// ** CREATE DRINKS, INGREDIENTS, VIDEO, REL TABLE ** ////////
-////////////////////////////////////////
 
 function loadDB() {
-// DRINKS TABLE
   client.query(`
     CREATE TABLE IF NOT EXISTS
     drinks (
@@ -116,8 +113,8 @@ function loadDB() {
         );
     `)
 
-  .then(loadDrinks)
-  .catch(console.error);
+    .then(loadDrinks)
+    .catch(console.error);
 }
 
 loadDB();
