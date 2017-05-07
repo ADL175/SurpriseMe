@@ -1,3 +1,5 @@
+'use strict';
+
 (function (module) {
 
 function Submit(submitObj) {

@@ -1,4 +1,6 @@
-(function(module) {
+'use strict';
+
+(function (module) {
   const homeController = {};
 
   homeController.init = () => {
@@ -8,6 +10,6 @@
     $('#drink-container').fadeIn(1500);
   };
 
-  Submit.prototype.toHtml(homeView.populateFilters)
+  Submit.prototype.toHtml(homeView.populateFilters);
   module.homeController = homeController;
 })(window);

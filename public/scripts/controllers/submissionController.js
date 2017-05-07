@@ -1,3 +1,5 @@
+'use strict';
+
 (function (module) {
   const submissionController = {};
 
@@ -5,7 +7,6 @@
     $('#about-us-section').hide();
     $('#generated-drinks-section').hide();
     $('#drink-container').hide();
-    // $('login.html').hide();
     $('#submission-view').fadeIn(1500);
   };
 
