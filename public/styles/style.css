@@ -116,11 +116,25 @@ input:valid, textarea:valid {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-@media only screen and (max-width: 640px) {
-   .nav a {
+@media only screen and (max-width: 500px) {
+  .nav {
+    padding: 0.1em;
+  }
 
-   }
+  .nav ul {
+    display: none;
+    padding: 0;
+    list-style: none;
+    clear: both;
+  }
 
-   .nav a:hover {
+  .nav:hover ul {
+    display: block;
+  }
 
-   }
+  .nav {
+    margin-right: .4em;
+    font-size: 1.5em;
+    padding: .5em .2em;
+    border-bottom: 1px solid #ccc;
+  }
