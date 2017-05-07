@@ -1,5 +1,6 @@
 'use strict';
-(function(module) {
+
+(function (module) {
 
   About.all = [];
 
@@ -9,18 +10,18 @@
     this.img = aboutObj.img;
   };
 
-  About.prototype.toHtml = function() {
+  About.prototype.toHtml = function () {
     let template = Handlebars.compile($('#about-template').text());
     return template(this);
-  }
+  };
 
-  About.fetchAbout = function(callback) {
+  About.fetchAbout = function (callback) {
     if (About.all.length < 3) {
       $.getJSON('/data/about.json')
         .then(
-          function(results) {
+          function (results) {
             console.log(results);
-            results.forEach(function(ele) {
+            results.forEach(function (ele) {
               About.all.push(new About(ele));
             });
 
