@@ -71,7 +71,6 @@
       ingredients: $('#ingredients').val(),
       recipe: $('#recipe').val(),
     });
-    console.log(userDrink);
     userDrink.insertRecord();
   };
 

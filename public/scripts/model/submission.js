@@ -26,7 +26,6 @@ Submit.prototype.insertRecord = function (callback) {
       video: this.video,
     })
     .then(res => {
-      console.log(res);
       return res;
     })
     .then(callback)

@@ -12,14 +12,11 @@ let alcoholType = [];
   Drinks.all.forEach;
 
   generatorView.populateFilters = function () {
-    console.log('this was run');
     $('#drink-filter').children().remove();
     $('#drink-filter').append('<option> CHOOSE YOUR DRINK </option>');
     let template = Handlebars.compile($('#option-template').text());
     Drinks.fetchAll(function () {
       drinkName = [];
-      console.log('populating filters now');
-      console.log(Drinks.all);
       Drinks.all.forEach(drink => {
         drinkName.push(drink.name);
       });
