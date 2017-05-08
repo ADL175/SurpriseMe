@@ -55,7 +55,6 @@ app.post('/drinks', (request, response) => {
       `INSERT INTO drinks(id, name, recipe, ingredients, tools, video)
     VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING`, [request.body.id, request.body.name, request.body.recipe, request.body.ingredients, request.body.tools, request.body.video]
     )
-
     .then(() => response.send('Insert Complete'))
     .catch(console.log);
 });
